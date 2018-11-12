@@ -33,7 +33,7 @@
 !! | mbota          | model_layer_number_at_cloud_base                              | vertical indices for low, middle and high cloud bases                         | index    |    2 | integer           |           | in     | F        |
 !! | clouds1        | total_cloud_fraction                                          | layer total cloud fraction                                                    | frac     |    2 | real              | kind_phys | in     | F        |
 !! | cldtaulw       | cloud_optical_depth_layers_at_10mu_band                       | approx 10mu band layer cloud optical depth                                    | none     |    2 | real              | kind_phys | in     | F        |
-!! | cldtausw       | cloud_optical_depth_layers_at_0_55mu_band                     | approx .55mu band layer cloud optical depth                                   | none     |    2 | real              | kind_phys | in     | F        |
+!! | cldtausw       | cloud_optical_depth_layers_at_0p55mu_band                     | approx .55mu band layer cloud optical depth                                   | none     |    2 | real              | kind_phys | in     | F        |
 !! | errmsg         | ccpp_error_message                                            | error message for error handling in CCPP                                      | none     |    0 | character         | len=*     | out    | F        |
 !! | errflg         | ccpp_error_flag                                               | error flag for error handling in CCPP                                         | flag     |    0 | integer           |           | out    | F        |
 !!
