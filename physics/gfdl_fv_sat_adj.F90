@@ -1,21 +1,21 @@
 !>\file gfdl_fv_sat_adj.F90
 !! This file contains the fast saturation adjustment in the GFDL cloud microphysics.
-!! and it is an "intermediate physics" implemented in the remapping Lagrangian to 
+!! and it is an "intermediate physics" implemented in the remapping Lagrangian to
 !! Eulerian loop of FV3 solver.
 !***********************************************************************
 !*                   GNU Lesser General Public License
 !*
 !* This file is part of the GFDL Cloud Microphysics.
 !*
-!* The GFDL Cloud Microphysics is free software: you can 
+!* The GFDL Cloud Microphysics is free software: you can
 !8 redistribute it and/or modify it under the terms of the
 !* GNU Lesser General Public License as published by the
-!* Free Software Foundation, either version 3 of the License, or 
+!* Free Software Foundation, either version 3 of the License, or
 !* (at your option) any later version.
 !*
 !* The GFDL Cloud Microphysics is distributed in the hope it will be
-!* useful, but WITHOUT ANYWARRANTY; without even the implied warranty 
-!* of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
+!* useful, but WITHOUT ANYWARRANTY; without even the implied warranty
+!* of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 !* See the GNU General Public License for more details.
 !*
 !* You should have received a copy of the GNU Lesser General Public
@@ -23,7 +23,7 @@
 !* If not, see <http://www.gnu.org/licenses/>.
 !***********************************************************************
 
-!> This module is part of the GFDL Cloud MP and it is the CCPP-compliant 
+!> This module is part of the GFDL Cloud MP and it is the CCPP-compliant
 !! fast phyiscs called in FV3 dynamics solver.
 module fv_sat_adj
 ! Modules Included:
@@ -203,7 +203,7 @@ end subroutine fv_sat_adj_finalize
 !! | ied            | ending_x_direction_index_domain                               | ending X direction index for domain                                                    | count     |    0 | integer   |           | in     | F        |
 !! | kmp            | top_layer_index_for_fast_physics                              | top layer index for GFDL mp                                                            | index     |    0 | integer   |           | in     | F        |
 !! | km             | vertical_dimension_for_fast_physics                           | number of vertical levels                                                              | count     |    0 | integer   |           | in     | F        |
-!! | kmdelz         | vertical_dimension_for_thickness_at_Lagrangian_surface        | vertical dimension for thickness at Lagrangian surface                                 | count     |    0 | integer   |           | in     | F        |
+!! | kmdelz         | vertical_dimension_for_thickness_at_lagrangian_surface        | vertical dimension for thickness at Lagrangian surface                                 | count     |    0 | integer   |           | in     | F        |
 !! | js             | starting_y_direction_index                                    | starting Y direction index                                                             | count     |    0 | integer   |           | in     | F        |
 !! | je             | ending_y_direction_index                                      | ending Y direction index                                                               | count     |    0 | integer   |           | in     | F        |
 !! | jsd            | starting_y_direction_index_domain                             | starting X direction index for domain                                                  | count     |    0 | integer   |           | in     | F        |
@@ -212,28 +212,28 @@ end subroutine fv_sat_adj_finalize
 !! | hydrostatic    | flag_for_hydrostatic_solver                                   | flag for use the hydrostatic or nonhydrostatic solver                                  | flag      |    0 | logical   |           | in     | F        |
 !! | fast_mp_consv  | flag_for_fast_microphysics_energy_conservation                | flag for fast microphysics energy conservation                                         | flag      |    0 | logical   |           | in     | F        |
 !! | te0_2d         | atmosphere_energy_content_in_column                           | atmosphere total energy in columns                                                     | J m-2     |    2 | real      |           | inout  | F        |
-!! | te0            | atmosphere_energy_content_at_Lagrangian_surface               | atmosphere total energy at Lagrangian surface                                          | J m-2     |    3 | real      |           | out    | F        |
-!! | qv             | water_vapor_specific_humidity_at_Lagrangian_surface           | water vapor specific humidity updated by fast physics at Lagrangian surface            | kg kg-1   |    3 | real      |           | inout  | F        |
-!! | ql             | cloud_liquid_water_specific_humidity_at_Lagrangian_surface    | cloud liquid water specific humidity updated by fast physics at Lagrangian surface     | kg kg-1   |    3 | real      |           | inout  | F        |
-!! | qi             | cloud_ice_specific_humidity_at_Lagrangian_surface             | cloud ice specific humidity updated by fast physics at Lagrangian surface              | kg kg-1   |    3 | real      |           | inout  | F        |
-!! | qr             | cloud_rain_specific_humidity_at_Lagrangian_surface            | cloud rain specific humidity updated by fast physics at Lagrangian surface             | kg kg-1   |    3 | real      |           | inout  | F        |
-!! | qs             | cloud_snow_specific_humidity_at_Lagrangian_surface            | cloud snow specific humidity updated by fast physics at Lagrangian surface             | kg kg-1   |    3 | real      |           | inout  | F        |
-!! | qg             | cloud_graupel_specific_humidity_at_Lagrangian_surface         | cloud graupel specific humidity updated by fast physics at Lagrangian surface          | kg kg-1   |    3 | real      |           | inout  | F        |
-!! | hs             | surface_geopotential_at_Lagrangian_surface                    | surface geopotential  at Lagrangian surface                                            | m2 s-2    |    2 | real      |           | in     | F        |
-!! | peln           | log_pressure_at_Lagrangian_surface                            | logarithm of pressure at Lagrangian surface                                            | Pa        |    3 | real      |           | in     | F        |
-!! | delz           | thickness_at_Lagrangian_surface                               | thickness at Lagrangian_surface                                                        | m         |    3 | real      |           | in     | F        |
-!! | delp           | pressure_thickness_at_Lagrangian_surface                      | pressure thickness at Lagrangian surface                                               | Pa        |    3 | real      |           | in     | F        |
-!! | pt             | virtual_temperature_at_Lagrangian_surface                     | virtual temperature at Lagrangian surface                                              | K         |    3 | real      |           | inout  | F        |
-!! | pkz            | finite-volume_mean_edge_pressure_raised_to_the_power_of_kappa | finite-volume mean edge pressure raised to the power of kappa                          | Pa**kappa |    3 | real      |           | inout  | F        |
-!! | q_con          | cloud_condensed_water_specific_humidity_at_Lagrangian_surface | cloud condensed water specific humidity updated by fast physics at Lagrangian surface  | kg kg-1   |    3 | real      |           | inout  | F        |
+!! | te0            | atmosphere_energy_content_at_lagrangian_surface               | atmosphere total energy at Lagrangian surface                                          | J m-2     |    3 | real      |           | out    | F        |
+!! | qv             | water_vapor_specific_humidity_at_lagrangian_surface           | water vapor specific humidity updated by fast physics at Lagrangian surface            | kg kg-1   |    3 | real      |           | inout  | F        |
+!! | ql             | cloud_liquid_water_specific_humidity_at_lagrangian_surface    | cloud liquid water specific humidity updated by fast physics at Lagrangian surface     | kg kg-1   |    3 | real      |           | inout  | F        |
+!! | qi             | cloud_ice_specific_humidity_at_lagrangian_surface             | cloud ice specific humidity updated by fast physics at Lagrangian surface              | kg kg-1   |    3 | real      |           | inout  | F        |
+!! | qr             | cloud_rain_specific_humidity_at_lagrangian_surface            | cloud rain specific humidity updated by fast physics at Lagrangian surface             | kg kg-1   |    3 | real      |           | inout  | F        |
+!! | qs             | cloud_snow_specific_humidity_at_lagrangian_surface            | cloud snow specific humidity updated by fast physics at Lagrangian surface             | kg kg-1   |    3 | real      |           | inout  | F        |
+!! | qg             | cloud_graupel_specific_humidity_at_lagrangian_surface         | cloud graupel specific humidity updated by fast physics at Lagrangian surface          | kg kg-1   |    3 | real      |           | inout  | F        |
+!! | hs             | surface_geopotential_at_lagrangian_surface                    | surface geopotential  at Lagrangian surface                                            | m2 s-2    |    2 | real      |           | in     | F        |
+!! | peln           | log_pressure_at_lagrangian_surface                            | logarithm of pressure at Lagrangian surface                                            | Pa        |    3 | real      |           | in     | F        |
+!! | delz           | thickness_at_lagrangian_surface                               | thickness at Lagrangian_surface                                                        | m         |    3 | real      |           | in     | F        |
+!! | delp           | pressure_thickness_at_lagrangian_surface                      | pressure thickness at Lagrangian surface                                               | Pa        |    3 | real      |           | in     | F        |
+!! | pt             | virtual_temperature_at_lagrangian_surface                     | virtual temperature at Lagrangian surface                                              | K         |    3 | real      |           | inout  | F        |
+!! | pkz            | finite_volume_mean_edge_pressure_raised_to_the_power_of_kappa | finite-volume mean edge pressure raised to the power of kappa                          | Pa**kappa |    3 | real      |           | inout  | F        |
+!! | q_con          | cloud_condensed_water_specific_humidity_at_lagrangian_surface | cloud condensed water specific humidity updated by fast physics at Lagrangian surface  | kg kg-1   |    3 | real      |           | inout  | F        |
 !! | akap           | kappa_dry_for_fast_physics                                    | modified kappa for dry air, fast physics                                               | none      |    0 | real      |           | in     | F        |
-!! | cappa          | cappa_moist_gas_constant_at_Lagrangian_surface                | cappa(i,j,k) = rdgas / ( rdgas +  cvm(i)/(1.+r_vir*q(i,j,k,sphum)) )                   | none      |    3 | real      |           | inout  | F        |
+!! | cappa          | cappa_moist_gas_constant_at_lagrangian_surface                | cappa(i,j,k) = rdgas / ( rdgas +  cvm(i)/(1.+r_vir*q(i,j,k,sphum)) )                   | none      |    3 | real      |           | inout  | F        |
 !! | area           | cell_area_for_fast_physics                                    | area of the grid cell for fast physics                                                 | m2        |    2 | real      | kind_grid | in     | F        |
-!! | dtdt           | tendency_of_air_temperature_at_Lagrangian_surface             | air temperature tendency due to fast physics at Lagrangian surface                     | K s-1     |    3 | real      |           | inout  | F        |
-!! | out_dt         | flag_for_tendency_of_air_temperature_at_Lagrangian_surface    | flag for calculating tendency of air temperature due to fast physics                   | flag      |    0 | logical   |           | in     | F        |
+!! | dtdt           | tendency_of_air_temperature_at_lagrangian_surface             | air temperature tendency due to fast physics at Lagrangian surface                     | K s-1     |    3 | real      |           | inout  | F        |
+!! | out_dt         | flag_for_tendency_of_air_temperature_at_lagrangian_surface    | flag for calculating tendency of air temperature due to fast physics                   | flag      |    0 | logical   |           | in     | F        |
 !! | last_step      | flag_for_the_last_step_of_k_split_remapping                   | flag for the last step of k-split remapping                                            | flag      |    0 | logical   |           | in     | F        |
 !! | do_qa          | flag_for_inline_cloud_fraction_calculation                    | flag for the inline cloud fraction calculation                                         | flag      |    0 | logical   |           | in     | F        |
-!! | qa             | cloud_fraction_at_Lagrangian_surface                          | cloud fraction at Lagrangian surface                                                   | none      |    3 | real      |           | out    | F        |
+!! | qa             | cloud_fraction_at_lagrangian_surface                          | cloud fraction at Lagrangian surface                                                   | none      |    3 | real      |           | out    | F        |
 !! | nthreads       | omp_threads                                                   | number of OpenMP threads available for fast physics schemes                            | count     |    0 | integer   |           | in     | F        |
 !! | errmsg         | ccpp_error_message                                            | error message for error handling in CCPP                                               | none      |    0 | character | len=*     | out    | F        |
 !! | errflg         | ccpp_error_flag                                               | error flag for error handling in CCPP                                                  | flag      |    0 | integer   |           | out    | F        |
@@ -976,7 +976,7 @@ end subroutine fv_sat_adj_work
 
 ! =======================================================================
 !>\ingroup fast_sat_adj
-!>@brief the function 'wqs1' computes the 
+!>@brief the function 'wqs1' computes the
 !! saturated specific humidity for table ii.
 ! =======================================================================
 real function wqs1 (ta, den)
@@ -1003,7 +1003,7 @@ end function wqs1
 
 ! =======================================================================
 !>\ingroup fast_sat_adj
-!>@brief the function 'wqs1' computes the  saturated specific humidity 
+!>@brief the function 'wqs1' computes the  saturated specific humidity
 !! for table iii
 ! =======================================================================
 real function iqs1 (ta, den)
@@ -1030,7 +1030,7 @@ end function iqs1
 
 ! =======================================================================
 !>\ingroup fast_sat_adj
-!>@brief The function 'wqs2'computes the gradient of saturated specific 
+!>@brief The function 'wqs2'computes the gradient of saturated specific
 !! humidity for table ii
 ! =======================================================================
 real function wqs2 (ta, den, dqdt)
@@ -1062,7 +1062,7 @@ end function wqs2
 
 ! =======================================================================
 !>\ingroup fast_sat_adj
-!>@brief The function wqs2_vect computes the gradient of saturated 
+!>@brief The function wqs2_vect computes the gradient of saturated
 !! specific humidity for table ii.
 !! It is the same as "wqs2", but written as vector function.
 ! =======================================================================
@@ -1100,7 +1100,7 @@ end subroutine wqs2_vect
 
 ! =======================================================================
 !>\ingroup fast_sat_adj
-!>@brief The function 'iqs2' computes the gradient of saturated specific 
+!>@brief The function 'iqs2' computes the gradient of saturated specific
 !! humidity for table iii.
 ! =======================================================================
 real function iqs2 (ta, den, dqdt)

@@ -238,9 +238,9 @@
 !!!!!                         end descriptions                         !!!!!
 !!!!!  ==============================================================  !!!!!
 
-!> This module contains the CCPP-compliant NCEP's modifications of the 
+!> This module contains the CCPP-compliant NCEP's modifications of the
 !! rrtm-lw radiation code from aer inc.
-      module rrtmg_lw 
+      module rrtmg_lw
 !
       use physparam,        only : ilwrate, ilwrgas, ilwcliq, ilwcice,  &
      &                             isubclw, icldflg, iovrlw,  ivflip,   &
@@ -382,8 +382,8 @@
 !! \section arg_table_rrtmg_lw_run Argument Table
 !! | local_name      | standard_name                                                                                 | long_name                                                 | units   | rank | type        |    kind   | intent | optional |
 !! |-----------------|-----------------------------------------------------------------------------------------------|-----------------------------------------------------------|---------|------|-------------|-----------|--------|----------|
-!! | plyr            | air_pressure_at_layer_for_radiation_in_hPa                                                    | air pressure layer                                        | hPa     |    2 | real        | kind_phys | in     | F        |
-!! | plvl            | air_pressure_at_interface_for_radiation_in_hPa                                                | air pressure level                                        | hPa     |    2 | real        | kind_phys | in     | F        |
+!! | plyr            | air_pressure_at_layer_for_radiation_in_hpa                                                    | air pressure layer                                        | hPa     |    2 | real        | kind_phys | in     | F        |
+!! | plvl            | air_pressure_at_interface_for_radiation_in_hpa                                                | air pressure level                                        | hPa     |    2 | real        | kind_phys | in     | F        |
 !! | tlyr            | air_temperature_at_layer_for_radiation                                                        | air temperature layer                                     | K       |    2 | real        | kind_phys | in     | F        |
 !! | tlvl            | air_temperature_at_interface_for_radiation                                                    | air temperature level                                     | K       |    2 | real        | kind_phys | in     | F        |
 !! | qlyr            | water_vapor_specific_humidity_at_layer_for_radiation                                          | specific humidity layer                                   | kg kg-1 |    2 | real        | kind_phys | in     | F        |
@@ -398,8 +398,8 @@
 !! | gasvmr_cfc22    | volume_mixing_ratio_cfc22                                                                     | volume mixing ratio cfc22                                 | kg kg-1 |    2 | real        | kind_phys | in     | F        |
 !! | gasvmr_ccl4     | volume_mixing_ratio_ccl4                                                                      | volume mixing ratio ccl4                                  | kg kg-1 |    2 | real        | kind_phys | in     | F        |
 !! | icseed          | seed_random_numbers_lw                                                                        | seed for random number generation for longwave radiation  | none    |    1 | integer     |           | in     | F        |
-!! | aeraod          | aerosol_optical_depth_for_longwave_bands_01-16                                                | aerosol optical depth for longwave bands 01-16            | none    |    3 | real        | kind_phys | in     | F        |
-!! | aerssa          | aerosol_single_scattering_albedo_for_longwave_bands_01-16                                     | aerosol single scattering albedo for longwave bands 01-16 | frac    |    3 | real        | kind_phys | in     | F        |
+!! | aeraod          | aerosol_optical_depth_for_longwave_bands_01_16                                                | aerosol optical depth for longwave bands 01-16            | none    |    3 | real        | kind_phys | in     | F        |
+!! | aerssa          | aerosol_single_scattering_albedo_for_longwave_bands_01_16                                     | aerosol single scattering albedo for longwave bands 01-16 | frac    |    3 | real        | kind_phys | in     | F        |
 !! | sfemis          | surface_longwave_emissivity                                                                   | surface emissivity                                        | frac    |    1 | real        | kind_phys | in     | F        |
 !! | sfgtmp          | surface_ground_temperature_for_radiation                                                      | surface ground temperature for radiation                  | K       |    1 | real        | kind_phys | in     | F        |
 !! | dzlyr           | layer_thickness_for_radiation                                                                 | layer thickness                                           | km      |    2 | real        | kind_phys | in     | F        |
@@ -1294,14 +1294,14 @@
 !-----------------------------------
 !> @}
       subroutine rrtmg_lw_finalize ()
-      end subroutine rrtmg_lw_finalize 
+      end subroutine rrtmg_lw_finalize
 
 
 
 !> \ingroup module_radlw_main
 !> \brief This subroutine performs calculations necessary for the initialization
 !! of the longwave model, which includes non-varying model variables, conversion
-!! factors, and look-up tables  
+!! factors, and look-up tables
 !!
 !! Lookup tables are computed for use in the lw
 !! radiative transfer, and input absorption coefficient data for each
@@ -1907,7 +1907,7 @@
      &    )
 
 !> -# Sub-column set up according to overlapping assumption:
-!!  - For random overlap, pick a random value at every level 
+!!  - For random overlap, pick a random value at every level
 !!  - For max-random overlap, pick a random value at every level
 !!  - For maximum overlap, pick same random numebr at every level
 
@@ -2100,7 +2100,7 @@
 !!\param scaleminor,scaleminorn2         scale factors for minor gases
 !!\param indminor        index of lower ref temp for minor gases
 !>\section setcoef_gen setcoef General Algorithm
-!! 
+!!
 ! ----------------------------------
       subroutine setcoef                                                &
      &     ( pavel,tavel,tz,stemp,h2ovmr,colamt,coldry,colbrd,          & !  ---  inputs:
@@ -3793,7 +3793,7 @@
 !!\param tautot           total optical depth (gas+aerosols)
 !>\section taumol_gen taumol General Algorithm
 !! @{
-!! subprograms called:  taugb## (## = 01 -16) 
+!! subprograms called:  taugb## (## = 01 -16)
       subroutine taumol                                                 &
      &     ( laytrop,pavel,coldry,colamt,colbrd,wx,tauaer,              & !  ---  inputs
      &       rfrate,fac00,fac01,fac10,fac11,jp,jt,jt1,                  &
@@ -6811,4 +6811,3 @@
 !........................................!
       end module rrtmg_lw                !
 !========================================!
-

@@ -2,7 +2,7 @@
 !! This file is the  parameterization of orographic gravity wave
 !! drag and mountain blocking.
 
-!> This module contains the CCPP-compliant orographic gravity wave 
+!> This module contains the CCPP-compliant orographic gravity wave
 !! drag pre interstitial codes.
       module gwdps_pre
 
@@ -844,7 +844,7 @@
 !! \f$\gamma\f$ is the orographic anisotropy (GAMMA).
                COSANG2 = cos(ANG(I,K))*cos(ANG(I,K))
                SINANG2 = sin(ANG(I,K))*sin(ANG(I,K))
-               if ( abs(GAMMA(J) * COSANG2 + SINANG2) 
+               if ( abs(GAMMA(J) * COSANG2 + SINANG2)
      &              .lt. 1.e-06 ) then
                  ZR = 2.0
                else
@@ -879,7 +879,7 @@
 !         if(lprnt) print *,' @K=1,ZLEN,DBTMP=',K,ZLEN,DBTMP
           endif
         ENDDO
-! 
+!
 !.............................
 !.............................
 ! end  mtn blocking section
@@ -1453,7 +1453,7 @@
 !! | local_name     | standard_name                                                                                 | long_name                                                                 | units | rank | type      | kind      | intent | optional |
 !! |----------------|-----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|-------|------|-----------|-----------|--------|----------|
 !! | lssav          | flag_diagnostics                                                                              | flag for calculating diagnostic fields                                    | flag  |    0 | logical   |           | in     | F        |
-!! | ldiag3d        | flag_diagnostics_3D                                                                           | flag for calculating 3-D diagnostic fields                                | flag  |    0 | logical   |           | in     | F        |
+!! | ldiag3d        | flag_diagnostics_3d                                                                           | flag for calculating 3-D diagnostic fields                                | flag  |    0 | logical   |           | in     | F        |
 !! | dtf            | time_step_for_dynamics                                                                        | dynamics time step                                                        | s     |    0 | real      | kind_phys | in     | F        |
 !! | dusfcg         | instantaneous_x_stress_due_to_gravity_wave_drag                                               | zonal surface stress due to orographic gravity wave drag                  | Pa    |    1 | real      | kind_phys | in     | F        |
 !! | dvsfcg         | instantaneous_y_stress_due_to_gravity_wave_drag                                               | meridional surface stress due to orographic gravity wave drag             | Pa    |    1 | real      | kind_phys | in     | F        |

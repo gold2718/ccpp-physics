@@ -265,8 +265,8 @@
 !!!!!  ==============================================================  !!!!!
 
 !> This module contains the CCPP-compliant NCEP's modifications of the rrtm-sw radiation 
-!! code from aer inc.     
-      module rrtmg_sw 
+!! code from aer inc.
+      module rrtmg_sw
 !
       use physparam,        only : iswrate, iswrgas, iswcliq, iswcice,  &
      &                             isubcsw, icldflg, iovrsw,  ivflip,   &
@@ -366,7 +366,7 @@
 
 !  ---  public accessable subprograms
 
-      public rrtmg_sw_init, rrtmg_sw_run, rrtmg_sw_finalize, rswinit 
+      public rrtmg_sw_init, rrtmg_sw_run, rrtmg_sw_finalize, rswinit
 
 
 ! =================
@@ -457,8 +457,8 @@
 !> \section arg_table_rrtmg_sw_run Argument Table
 !! | local_name      | standard_name                                                                                  | long_name                                                                | units   | rank | type        |    kind   | intent | optional |
 !! |-----------------|------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|---------|------|-------------|-----------|--------|----------|
-!! | plyr            | air_pressure_at_layer_for_radiation_in_hPa                                                     | air pressure layer                                                       | hPa     |    2 | real        | kind_phys | in     | F        |
-!! | plvl            | air_pressure_at_interface_for_radiation_in_hPa                                                 | air pressure level                                                       | hPa     |    2 | real        | kind_phys | in     | F        |
+!! | plyr            | air_pressure_at_layer_for_radiation_in_hpa                                                     | air pressure layer                                                       | hPa     |    2 | real        | kind_phys | in     | F        |
+!! | plvl            | air_pressure_at_interface_for_radiation_in_hpa                                                 | air pressure level                                                       | hPa     |    2 | real        | kind_phys | in     | F        |
 !! | tlyr            | air_temperature_at_layer_for_radiation                                                         | air temperature layer                                                    | K       |    2 | real        | kind_phys | in     | F        |
 !! | tlvl            | air_temperature_at_interface_for_radiation                                                     | air temperature level                                                    | K       |    2 | real        | kind_phys | in     | F        |
 !! | qlyr            | water_vapor_specific_humidity_at_layer_for_radiation                                           | specific humidity layer                                                  | kg kg-1 |    2 | real        | kind_phys | in     | F        |
@@ -473,13 +473,13 @@
 !! | gasvmr_cfc22    | volume_mixing_ratio_cfc22                                                                      | volume mixing ratio cfc22                                                | kg kg-1 |    2 | real        | kind_phys | in     | F        |
 !! | gasvmr_ccl4     | volume_mixing_ratio_ccl4                                                                       | volume mixing ratio ccl4                                                 | kg kg-1 |    2 | real        | kind_phys | in     | F        |
 !! | icseed          | seed_random_numbers_sw                                                                         | seed for random number generation for shortwave radiation                | none    |    1 | integer     |           | in     | F        |
-!! | aeraod          | aerosol_optical_depth_for_shortwave_bands_01-16                                                | aerosol optical depth for shortwave bands 01-16                          | none    |    3 | real        | kind_phys | in     | F        |
-!! | aerssa          | aerosol_single_scattering_albedo_for_shortwave_bands_01-16                                     | aerosol single scattering albedo for shortwave bands 01-16               | frac    |    3 | real        | kind_phys | in     | F        |
-!! | aerasy          | aerosol_asymmetry_parameter_for_shortwave_bands_01-16                                          | aerosol asymmetry paramter for shortwave bands 01-16                     | none    |    3 | real        | kind_phys | in     | F        |
-!! | sfcalb_nir_dir  | surface_albedo_due_to_near_IR_direct                                                           | surface albedo due to near IR direct beam                                | frac    |    1 | real        | kind_phys | in     | F        |
-!! | sfcalb_nir_dif  | surface_albedo_due_to_near_IR_diffused                                                         | surface albedo due to near IR diffused beam                              | frac    |    1 | real        | kind_phys | in     | F        |
-!! | sfcalb_uvis_dir | surface_albedo_due_to_UV_and_VIS_direct                                                        | surface albedo due to UV+VIS direct beam                                 | frac    |    1 | real        | kind_phys | in     | F        |
-!! | sfcalb_uvis_dif | surface_albedo_due_to_UV_and_VIS_diffused                                                      | surface albedo due to UV+VIS diffused beam                               | frac    |    1 | real        | kind_phys | in     | F        |
+!! | aeraod          | aerosol_optical_depth_for_shortwave_bands_01_16                                                | aerosol optical depth for shortwave bands 01-16                          | none    |    3 | real        | kind_phys | in     | F        |
+!! | aerssa          | aerosol_single_scattering_albedo_for_shortwave_bands_01_16                                     | aerosol single scattering albedo for shortwave bands 01-16               | frac    |    3 | real        | kind_phys | in     | F        |
+!! | aerasy          | aerosol_asymmetry_parameter_for_shortwave_bands_01_16                                          | aerosol asymmetry paramter for shortwave bands 01-16                     | none    |    3 | real        | kind_phys | in     | F        |
+!! | sfcalb_nir_dir  | surface_albedo_due_to_near_ir_direct                                                           | surface albedo due to near IR direct beam                                | frac    |    1 | real        | kind_phys | in     | F        |
+!! | sfcalb_nir_dif  | surface_albedo_due_to_near_ir_diffused                                                         | surface albedo due to near IR diffused beam                              | frac    |    1 | real        | kind_phys | in     | F        |
+!! | sfcalb_uvis_dir | surface_albedo_due_to_uv_and_vis_direct                                                        | surface albedo due to UV+VIS direct beam                                 | frac    |    1 | real        | kind_phys | in     | F        |
+!! | sfcalb_uvis_dif | surface_albedo_due_to_uv_and_vis_diffused                                                      | surface albedo due to UV+VIS diffused beam                               | frac    |    1 | real        | kind_phys | in     | F        |
 !! | dzlyr           | layer_thickness_for_radiation                                                                  | layer thickness                                           | km      |    2 | real        | kind_phys | in     | F        |
 !! | delpin          | layer_pressure_thickness_for_radiation                                                         | layer pressure thickness                                  | hPa     |    2 | real        | kind_phys | in     | F        | 
 !! | de_lgth         | cloud_decorrelation_length                                                                     | cloud decorrelation length                                | km      |    1 | real        | kind_phys | in     | F        | 
@@ -496,7 +496,7 @@
 !! | hswc            | tendency_of_air_temperature_due_to_shortwave_heating_on_radiation_time_step                    | shortwave total sky heating rate                                         | K s-1   |    2 | real        | kind_phys | inout  | F        |
 !! | topflx          | sw_fluxes_top_atmosphere                                                                       | shortwave total sky fluxes at the top of the atm                         | W m-2   |    1 | topfsw_type |           | inout  | F        |
 !! | sfcflx          | sw_fluxes_sfc                                                                                  | shortwave total sky fluxes at the Earth surface                          | W m-2   |    1 | sfcfsw_type |           | inout  | F        |
-!! | cldtau          | cloud_optical_depth_layers_at_0.55mu_band                                                      | approx .55mu band layer cloud optical depth                              | none    |    2 | real        | kind_phys | inout  | F        |
+!! | cldtau          | cloud_optical_depth_layers_at_0_55mu_band                                                      | approx .55mu band layer cloud optical depth                              | none    |    2 | real        | kind_phys | inout  | F        |
 !! | hsw0            | tendency_of_air_temperature_due_to_shortwave_heating_assuming_clear_sky_on_radiation_time_step | shortwave clear sky heating rate                                         | K s-1   |    2 | real        | kind_phys | inout  | T        |
 !! | hswb            | sw_heating_rate_spectral                                                                       | shortwave total sky heating rate (spectral)                              | K s-1   |    3 | real        | kind_phys | inout  | T        |
 !! | flxprf          | sw_fluxes                                                                                      | sw fluxes total sky / csk and up / down at levels                        | W m-2   |    2 | profsw_type |           | inout  | T        |
@@ -722,8 +722,8 @@
       real (kind=kind_phys), dimension(npts,nlay), intent(in) ::        &
      &       plyr, tlyr, qlyr, olyr, dzlyr, delpin
 
-      real (kind=kind_phys),dimension(npts),intent(in):: sfcalb_nir_dir 
-      real (kind=kind_phys),dimension(npts),intent(in):: sfcalb_nir_dif 
+      real (kind=kind_phys),dimension(npts),intent(in):: sfcalb_nir_dir
+      real (kind=kind_phys),dimension(npts),intent(in):: sfcalb_nir_dif
       real (kind=kind_phys),dimension(npts),intent(in):: sfcalb_uvis_dir
       real (kind=kind_phys),dimension(npts),intent(in):: sfcalb_uvis_dif
 
@@ -1538,7 +1538,7 @@
         heatfac = con_g * 1.0e-2 / con_cp           !   (in k/second)
       endif
 
-!> -# Define exponential lookup tables for transmittance. 
+!> -# Define exponential lookup tables for transmittance.
 !          tau is  computed as a function of the \a tau transition function, and
 !           transmittance is calculated as a function of tau.  all tables
 !           are computed at intervals of 0.0001.  the inverse of the
@@ -3428,10 +3428,10 @@
           zasy3 = 0.75 * zasy1
 
 !>  - Perform general two-stream expressions:
-!!\n control parameters in module "physparam" 
-!!\n iswmode - control flag for 2-stream transfer schemes 
-!!\n           = 1 delta-eddington (joseph et al., 1976) 
-!!\n           = 2 pifm (zdunkowski et al., 1980) 
+!!\n control parameters in module "physparam"
+!!\n iswmode - control flag for 2-stream transfer schemes
+!!\n           = 1 delta-eddington (joseph et al., 1976)
+!!\n           = 2 pifm (zdunkowski et al., 1980)
 !!\n           = 3 discrete ordinates (liou, 1973)
           if ( iswmode == 1 ) then
             zgam1 = 1.75 - zssa1 * (f_one + zasy3)

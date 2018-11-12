@@ -43,7 +43,7 @@
 !! | prdout         | ozone_forcing                                                             | ozone forcing coefficients                                                 | various |    3 | real      | kind_phys | in     | F        |
 !! | oz_coeff       | number_of_coefficients_in_ozone_forcing_data                              | number of coefficients in ozone forcing data                               | index   |    0 | integer   |           | in     | F        |
 !! | delp           | air_pressure_difference_between_midlayers                                 | difference between mid-layer pressures                                     | Pa      |    2 | real      | kind_phys | in     | F        |
-!! | ldiag3d        | flag_diagnostics_3D                                                       | flag for calculating 3-D diagnostic fields                                 | flag    |    0 | logical   |           | in     | F        |
+!! | ldiag3d        | flag_diagnostics_3d                                                       | flag for calculating 3-D diagnostic fields                                 | flag    |    0 | logical   |           | in     | F        |
 !! | ozp1           | cumulative_change_in_ozone_concentration_due_to_production_and_loss_rate  | cumulative change in ozone concentration due to production and loss rate   | kg kg-1 |    2 | real      | kind_phys | inout  | F        |
 !! | ozp2           | cumulative_change_in_ozone_concentration_due_to_ozone_mixing_ratio        | cumulative change in ozone concentration due to ozone mixing ratio         | kg kg-1 |    2 | real      | kind_phys | inout  | F        |
 !! | ozp3           | cumulative_change_in_ozone_concentration_due_to_temperature               | cumulative change in ozone concentration due to temperature                | kg kg-1 |    2 | real      | kind_phys | inout  | F        |
@@ -78,7 +78,7 @@
      &                     con_g
       real :: gravi
       logical, intent(in) :: ldiag3d
-      
+
       character(len=*), intent(out) :: errmsg
       integer,          intent(out) :: errflg
 !
@@ -102,12 +102,12 @@
         colo3(:,levs+1) = 0.0
         do l=levs,1,-1
           do i=1,im
-            colo3(i,l) = colo3(i,l+1) + ozi(i,l) * delp(i,l) * gravi 
+            colo3(i,l) = colo3(i,l+1) + ozi(i,l) * delp(i,l) * gravi
           enddo
         enddo
       endif
 !
-!> - Apply vertically linear interpolation to the ozone coefficients. 
+!> - Apply vertically linear interpolation to the ozone coefficients.
       do l=1,levs
         pmin =  1.0e10
         pmax = -1.0e10
@@ -170,8 +170,8 @@
           endif
         endif
 !> - Calculate the 4 terms of prognostic ozone change during time \a dt:  
-!!  - ozp1(:,:) - Ozone production from production/loss ratio 
-!!  - ozp2(:,:) - Ozone production from ozone mixing ratio 
+!!  - ozp1(:,:) - Ozone production from production/loss ratio
+!!  - ozp2(:,:) - Ozone production from ozone mixing ratio
 !!  - ozp3(:,:) - Ozone production from temperature term at model layers 
 !!  - ozp4(:,:) - Ozone production from column ozone term at model layers
         if (oz_coeff == 4) then

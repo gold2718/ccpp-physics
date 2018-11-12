@@ -2,7 +2,7 @@
 !! stationary convection forced gravity wave drag based on
 !! Chun and Baik (1998) \cite chun_and_baik_1998.
 
-!> This module contains the CCPP-compliant convective gravity 
+!> This module contains the CCPP-compliant convective gravity
 !! wave drag pre interstitial codes.
       module gwdc_pre
       contains
@@ -22,8 +22,8 @@
 !! | im             | horizontal_loop_extent                                                   | horizontal loop extent                                        | count |    0 | integer   |           | in     | F        |
 !! | cgwf           | multiplication_factors_for_convective_gravity_wave_drag                  | multiplication factors for convective gravity wave drag       | none  |    1 | real      | kind_phys | in     | F        |
 !! | dx             | cell_size                                                                | grid size in zonal direction                                  | m     |    1 | real      | kind_phys | in     | F        |
-!! | work1          | grid_size_related_coefficient_used_in_scale-sensitive_schemes            | grid size related coefficient used in scale-sensitive schemes | none  |    1 | real      | kind_phys | in     | F        |
-!! | work2          | grid_size_related_coefficient_used_in_scale-sensitive_schemes_complement | complement to work1                                           | none  |    1 | real      | kind_phys | in     | F        |
+!! | work1          | grid_size_related_coefficient_used_in_scale_sensitive_schemes            | grid size related coefficient used in scale-sensitive schemes | none  |    1 | real      | kind_phys | in     | F        |
+!! | work2          | grid_size_related_coefficient_used_in_scale_sensitive_schemes_complement | complement to work1                                           | none  |    1 | real      | kind_phys | in     | F        |
 !! | dlength        | characteristic_grid_length_scale                                         | representative horizontal length scale of grid box            | m     |    1 | real      | kind_phys | out    | F        |
 !! | cldf           | cloud_area_fraction                                                      | fraction of grid box area in which updrafts occur             | frac  |    1 | real      | kind_phys | out    | F        |
 !! | levs           | vertical_dimension                                                       | number of vertical layers                                     | count |    0 | integer   |           | in     | F        |
@@ -103,7 +103,7 @@
 
       end module gwdc_pre
 
-!> This module contains the CCPP-compliant 
+!> This module contains the CCPP-compliant
 !! convective gravity wave drag scheme.
       module gwdc
 
@@ -321,7 +321,6 @@
      &                                     dlen(:),       gqmcldlen(:)
 !     real(kind=kind_phys), allocatable :: plnint(:,:),   dpint(:,:),
 !    &                                     taugwci(:,:),  taugwcxi(:,:),
-!    &                                     taugwcyi(:,:), bruni(:,:),
 !    &                                     taugwcyi(:,:), bruni(:,:),
       real(kind=kind_phys), allocatable :: plnint(:,:),   velco(:,:),
      &                                     taugwci(:,:),  bruni(:,:),
@@ -651,7 +650,7 @@
           bruni(i,k) = sqrt (max (n2min, n2))
         enddo
       enddo
- 
+
       deallocate (spfh)
 !-----------------------------------------------------------------------
 !
@@ -1489,7 +1488,7 @@
 
       end module gwdc
 
-!> This module contains the CCPP-compliant convective gravity wave 
+!> This module contains the CCPP-compliant convective gravity wave
 !! drag post intersititial codes.
       module gwdc_post
 
@@ -1510,7 +1509,7 @@
 !! | im             | horizontal_loop_extent                                          | horizontal loop extent                                                   | count      |    0 | integer   |           | in     | F        |
 !! | levs           | vertical_dimension                                              | number of vertical layers                                                | count      |    0 | integer   |           | in     | F        |
 !! | lssav          | flag_diagnostics                                                | flag for calculating diagnostic fields                                   | flag       |    0 | logical   |           | in     | F        |
-!! | ldiag3d        | flag_diagnostics_3D                                             | flag for calculating 3-D diagnostic fields                               | flag       |    0 | logical   |           | in     | F        |
+!! | ldiag3d        | flag_diagnostics_3d                                             | flag for calculating 3-D diagnostic fields                               | flag       |    0 | logical   |           | in     | F        |
 !! | dtf            | time_step_for_dynamics                                          | dynamics time step                                                       | s          |    0 | real      | kind_phys | in     | F        |
 !! | dtp            | time_step_for_physics                                           | physics time step                                                        | s          |    0 | real      | kind_phys | in     | F        |
 !! | con_cp         | specific_heat_of_dry_air_at_constant_pressure                   | specific heat of dry air at constant pressure                            | J kg-1 K-1 |    0 | real      | kind_phys | in     | F        |
@@ -1594,4 +1593,3 @@
       end subroutine gwdc_post_finalize
 
       end module gwdc_post
-

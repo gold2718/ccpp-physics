@@ -16,14 +16,14 @@
 !> \section arg_table_GFS_rrtmg_pre_run Argument Table
 !! | local_name        | standard_name                                                 | long_name                                                                     | units    | rank |  type            |   kind    | intent | optional |
 !! |-------------------|---------------------------------------------------------------|-------------------------------------------------------------------------------|----------|------|------------------|-----------|--------|----------|
-!! | Model             | FV3-GFS_Control_type                                          | Fortran DDT containing FV3-GFS model control parameters                       | DDT      |    0 | GFS_control_type |           | in     | F        |
-!! | Grid              | FV3-GFS_Grid_type                                             | Fortran DDT containing FV3-GFS grid and interpolation related data            | DDT      |    0 | GFS_grid_type    |           | in     | F        |
-!! | Sfcprop           | FV3-GFS_Sfcprop_type                                          | Fortran DDT containing FV3-GFS surface fields                                 | DDT      |    0 | GFS_sfcprop_type |           | in     | F        |
-!! | Statein           | FV3-GFS_Statein_type                                          | Fortran DDT containing FV3-GFS prognostic state data in from dycore           | DDT      |    0 | GFS_statein_type |           | in     | F        |
-!! | Tbd               | FV3-GFS_Tbd_type                                              | Fortran DDT containing FV3-GFS data not yet assigned to a defined container   | DDT      |    0 | GFS_tbd_type     |           | in     | F        |
-!! | Cldprop           | FV3-GFS_Cldprop_type                                          | Fortran DDT containing FV3-GFS cloud fields needed by radiation from physics  | DDT      |    0 | GFS_cldprop_type |           | in     | F        |
-!! | Coupling          | FV3-GFS_Coupling_type                                         | Fortran DDT containing FV3-GFS fields needed for coupling                     | DDT      |    0 | GFS_coupling_type|           | in     | F        |
-!! | Radtend           | FV3-GFS_Radtend_type                                          | Fortran DDT containing FV3-GFS radiation tendencies                           | DDT      |    0 | GFS_radtend_type |           | inout  | F        |
+!! | Model             | fv3_gfs_control_type                                          | Fortran DDT containing FV3-GFS model control parameters                       | DDT      |    0 | GFS_control_type |           | in     | F        |
+!! | Grid              | fv3_gfs_grid_type                                             | Fortran DDT containing FV3-GFS grid and interpolation related data            | DDT      |    0 | GFS_grid_type    |           | in     | F        |
+!! | Sfcprop           | fv3_gfs_sfcprop_type                                          | Fortran DDT containing FV3-GFS surface fields                                 | DDT      |    0 | GFS_sfcprop_type |           | in     | F        |
+!! | Statein           | fv3_gfs_statein_type                                          | Fortran DDT containing FV3-GFS prognostic state data in from dycore           | DDT      |    0 | GFS_statein_type |           | in     | F        |
+!! | Tbd               | fv3_gfs_tbd_type                                              | Fortran DDT containing FV3-GFS data not yet assigned to a defined container   | DDT      |    0 | GFS_tbd_type     |           | in     | F        |
+!! | Cldprop           | fv3_gfs_cldprop_type                                          | Fortran DDT containing FV3-GFS cloud fields needed by radiation from physics  | DDT      |    0 | GFS_cldprop_type |           | in     | F        |
+!! | Coupling          | fv3_gfs_coupling_type                                         | Fortran DDT containing FV3-GFS fields needed for coupling                     | DDT      |    0 | GFS_coupling_type|           | in     | F        |
+!! | Radtend           | fv3_gfs_radtend_type                                          | Fortran DDT containing FV3-GFS radiation tendencies                           | DDT      |    0 | GFS_radtend_type |           | inout  | F        |
 !! | lm                | vertical_layer_dimension_for_radiation                        | number of vertical layers for radiation calculation                           | count    |    0 | integer          |           | in     | F        |
 !! | im                | horizontal_loop_extent                                        | horizontal loop extent                                                        | count    |    0 | integer          |           | in     | F        |
 !! | lmk               | adjusted_vertical_layer_dimension_for_radiation               | number of vertical layers for radiation                                       | count    |    0 | integer          |           | in     | F        |
@@ -32,10 +32,10 @@
 !! | kt                | vertical_index_difference_between_layer_and_upper_bound       | vertical index difference between layer and upper bound                       | index    |    0 | integer          |           | out    | F        |
 !! | kb                | vertical_index_difference_between_layer_and_lower_bound       | vertical index difference between layer and lower bound                       | index    |    0 | integer          |           | out    | F        |
 !! | raddt             | time_step_for_radiation                                       | radiation time step                                                           | s        |    0 | real             | kind_phys | out    | F        |
-!! | delp              | layer_pressure_thickness_for_radiation                        | layer pressure thickness on radiation levels                                  | hPa      |    2 | real             | kind_phys | out    | F        | 
+!! | delp              | layer_pressure_thickness_for_radiation                        | layer pressure thickness on radiation levels                                  | hPa      |    2 | real             | kind_phys | out    | F        |
 !! | dz                | layer_thickness_for_radiation                                 | layer thickness on radiation levels                                           | km       |    2 | real             | kind_phys | out    | F        |
-!! | plvl              | air_pressure_at_interface_for_radiation_in_hPa                | air pressure at vertical interface for radiation calculation                  | hPa      |    2 | real             | kind_phys | out    | F        |
-!! | plyr              | air_pressure_at_layer_for_radiation_in_hPa                    | air pressure at vertical layer for radiation calculation                      | hPa      |    2 | real             | kind_phys | out    | F        |
+!! | plvl              | air_pressure_at_interface_for_radiation_in_hpa                | air pressure at vertical interface for radiation calculation                  | hPa      |    2 | real             | kind_phys | out    | F        |
+!! | plyr              | air_pressure_at_layer_for_radiation_in_hpa                    | air pressure at vertical layer for radiation calculation                      | hPa      |    2 | real             | kind_phys | out    | F        |
 !! | tlvl              | air_temperature_at_interface_for_radiation                    | air temperature at vertical interface for radiation calculation               | K        |    2 | real             | kind_phys | out    | F        |
 !! | tlyr              | air_temperature_at_layer_for_radiation                        | air temperature at vertical layer for radiation calculation                   | K        |    2 | real             | kind_phys | out    | F        |
 !! | tsfg              | surface_ground_temperature_for_radiation                      | surface ground temperature for radiation                                      | K        |    1 | real             | kind_phys | out    | F        |
@@ -52,12 +52,12 @@
 !! | gasvmr_cfc22      | volume_mixing_ratio_cfc22                                     | CFC22 volume mixing ratio                                                     | kg kg-1  |    2 | real             | kind_phys | out    | F        |
 !! | gasvmr_ccl4       | volume_mixing_ratio_ccl4                                      | CCL4 volume mixing ratio                                                      | kg kg-1  |    2 | real             | kind_phys | out    | F        |
 !! | gasvmr_cfc113     | volume_mixing_ratio_cfc113                                    | CFC113 volume mixing ratio                                                    | kg kg-1  |    2 | real             | kind_phys | out    | F        |
-!! | faersw1           | aerosol_optical_depth_for_shortwave_bands_01-16               | aerosol optical depth for shortwave bands 01-16                               | none     |    3 | real             | kind_phys | out    | F        |
-!! | faersw2           | aerosol_single_scattering_albedo_for_shortwave_bands_01-16    | aerosol single scattering albedo for shortwave bands 01-16                    | frac     |    3 | real             | kind_phys | out    | F        |
-!! | faersw3           | aerosol_asymmetry_parameter_for_shortwave_bands_01-16         | aerosol asymmetry parameter for shortwave bands 01-16                         | none     |    3 | real             | kind_phys | out    | F        |
-!! | faerlw1           | aerosol_optical_depth_for_longwave_bands_01-16                | aerosol optical depth for longwave bands 01-16                                | none     |    3 | real             | kind_phys | out    | F        |
-!! | faerlw2           | aerosol_single_scattering_albedo_for_longwave_bands_01-16     | aerosol single scattering albedo for longwave bands 01-16                     | frac     |    3 | real             | kind_phys | out    | F        |
-!! | faerlw3           | aerosol_asymmetry_parameter_for_longwave_bands_01-16          | aerosol asymmetry parameter for longwave bands 01-16                          | none     |    3 | real             | kind_phys | out    | F        |
+!! | faersw1           | aerosol_optical_depth_for_shortwave_bands_01_16               | aerosol optical depth for shortwave bands 01-16                               | none     |    3 | real             | kind_phys | out    | F        |
+!! | faersw2           | aerosol_single_scattering_albedo_for_shortwave_bands_01_16    | aerosol single scattering albedo for shortwave bands 01-16                    | frac     |    3 | real             | kind_phys | out    | F        |
+!! | faersw3           | aerosol_asymmetry_parameter_for_shortwave_bands_01_16         | aerosol asymmetry parameter for shortwave bands 01-16                         | none     |    3 | real             | kind_phys | out    | F        |
+!! | faerlw1           | aerosol_optical_depth_for_longwave_bands_01_16                | aerosol optical depth for longwave bands 01-16                                | none     |    3 | real             | kind_phys | out    | F        |
+!! | faerlw2           | aerosol_single_scattering_albedo_for_longwave_bands_01_16     | aerosol single scattering albedo for longwave bands 01-16                     | frac     |    3 | real             | kind_phys | out    | F        |
+!! | faerlw3           | aerosol_asymmetry_parameter_for_longwave_bands_01_16          | aerosol asymmetry parameter for longwave bands 01-16                          | none     |    3 | real             | kind_phys | out    | F        |
 !! | aerodp            | atmosphere_optical_thickness_due_to_ambient_aerosol_particles | vertical integrated optical depth for various aerosol species                 | none     |    2 | real             | kind_phys | out    | F        |
 !! | clouds1           | total_cloud_fraction                                          | layer total cloud fraction                                                    | frac     |    2 | real             | kind_phys | out    | F        |
 !! | clouds2           | cloud_liquid_water_path                                       | layer cloud liquid water path                                                 | g m-2    |    2 | real             | kind_phys | out    | F        |
@@ -393,10 +393,10 @@
            gasvmr_o2     (i,k)  = gasvmr(i,k,4)
            gasvmr_co     (i,k)  = gasvmr(i,k,5)
            gasvmr_cfc11  (i,k)  = gasvmr(i,k,6)
-           gasvmr_cfc12  (i,k)  = gasvmr(i,k,7)   
-           gasvmr_cfc22  (i,k)  = gasvmr(i,k,8)    
-           gasvmr_ccl4   (i,k)  = gasvmr(i,k,9)  
-           gasvmr_cfc113 (i,k)  = gasvmr(i,k,10) 
+           gasvmr_cfc12  (i,k)  = gasvmr(i,k,7)
+           gasvmr_cfc22  (i,k)  = gasvmr(i,k,8)
+           gasvmr_ccl4   (i,k)  = gasvmr(i,k,9)
+           gasvmr_cfc113 (i,k)  = gasvmr(i,k,10)
          enddo
       enddo
 
@@ -525,12 +525,12 @@
 ! CCPP
       do j = 1,NBDSW
         do k = 1, LMK
-          do i = 1, IM 
+          do i = 1, IM
             ! NF_AESW = 3
             faersw1(i,k,j) = faersw(i,k,j,1)
             faersw2(i,k,j) = faersw(i,k,j,2)
             faersw3(i,k,j) = faersw(i,k,j,3)
-          enddo 
+          enddo
         enddo
        enddo
 
@@ -601,13 +601,13 @@
           if (.not. Model%lgfdlmprad) then
 
 
-! rsun the  summation methods and order make the difference in calculation 
+! rsun the  summation methods and order make the difference in calculation
 
-!            clw(:,:) = clw(:,:) + tracer1(:,1:LMK,Model%ntcw)   &        
-!                                + tracer1(:,1:LMK,Model%ntiw)   & 
-!                                + tracer1(:,1:LMK,Model%ntrw)   & 
-!                                + tracer1(:,1:LMK,Model%ntsw)   & 
-!                                + tracer1(:,1:LMK,Model%ntgl) 
+!            clw(:,:) = clw(:,:) + tracer1(:,1:LMK,Model%ntcw)   &
+!                                + tracer1(:,1:LMK,Model%ntiw)   &
+!                                + tracer1(:,1:LMK,Model%ntrw)   &
+!                                + tracer1(:,1:LMK,Model%ntsw)   &
+!                                + tracer1(:,1:LMK,Model%ntgl)
             ccnd(:,:,1) =               tracer1(:,1:LMK,ntcw)
             ccnd(:,:,1) = ccnd(:,:,1) + tracer1(:,1:LMK,ntrw)
             ccnd(:,:,1) = ccnd(:,:,1) + tracer1(:,1:LMK,ntiw)
@@ -618,7 +618,7 @@
             do j=1,Model%ncld
               ccnd(:,:,1) = ccnd(:,:,1) + tracer1(:,1:LMK,ntcw+j-1) ! cloud condensate amount
             enddo
-          endif 
+          endif
           do k=1,LMK
             do i=1,IM
               if (ccnd(i,k,1) < EPSQ ) ccnd(i,k,1) = 0.0
@@ -761,13 +761,13 @@
 !           call progcld4o (plyr, plvl, tlyr, tvly, qlyr, qstl, rhly,       &   !  ---  inputs
 !                           tracer1, Grid%xlat, Grid%xlon, Sfcprop%slmsk,   &
 !                           dz, delp,                                       &
-!                           ntrac-1, Model%ntcw-1,Model%ntiw-1,Model%ntrw-1,& 
+!                           ntrac-1, Model%ntcw-1,Model%ntiw-1,Model%ntrw-1,&
 !                           Model%ntsw-1,Model%ntgl-1,Model%ntclamt-1,      &
 !                           im, lmk, lmp,                                   &
 !                           clouds, cldsa, mtopa, mbota, de_lgth)               !  ---  outputs
-          endif 
+          endif
 
-        elseif(Model%imp_physics == 8 .or. Model%imp_physics == 6) then		       ! Thompson / WSM6 cloud micrphysics scheme 
+        elseif(Model%imp_physics == 8 .or. Model%imp_physics == 6) then		       ! Thompson / WSM6 cloud micrphysics scheme
 
           if (Model%kdt == 1) then
             Tbd%phy_f3d(:,:,1) = 10.
@@ -775,16 +775,16 @@
             Tbd%phy_f3d(:,:,3) = 250.
           endif
 
-          call progcld5 (plyr,plvl,tlyr,qlyr,qstl,rhly,tracer1,     &  !  --- inputs 
+          call progcld5 (plyr,plvl,tlyr,qlyr,qstl,rhly,tracer1,     &  !  --- inputs
                          Grid%xlat,Grid%xlon,Sfcprop%slmsk,dz,delp, &
-                         ntrac-1, ntcw-1,ntiw-1,ntrw-1,             & 
+                         ntrac-1, ntcw-1,ntiw-1,ntrw-1,             &
                          ntsw-1,ntgl-1,                             &
                          im, lmk, lmp, Model%uni_cld,               &
                          Model%lmfshal,Model%lmfdeep2,              &
                          cldcov(:,1:LMK),Tbd%phy_f3d(:,:,1),        &
                          Tbd%phy_f3d(:,:,2), Tbd%phy_f3d(:,:,3),    &
-                         clouds,cldsa,mtopa,mbota, de_lgth)            !  --- outputs  
-              
+                         clouds,cldsa,mtopa,mbota, de_lgth)            !  --- outputs
+
         endif                            ! end if_imp_physics
 
 !      endif                                ! end_if_ntcw
@@ -819,7 +819,7 @@
 ! mg, sfc-perts
 
       end subroutine GFS_rrtmg_pre_run
-   
+
 !> \section arg_table_GFS_rrtmg_pre_finalize Argument Table
 !!
       subroutine GFS_rrtmg_pre_finalize ()
@@ -827,5 +827,3 @@
 
 !! @}
       end module GFS_rrtmg_pre
-
-

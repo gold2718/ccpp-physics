@@ -6,13 +6,13 @@
 
       module sfc_diag
       contains
-  
+
       subroutine sfc_diag_init
       end subroutine sfc_diag_init
-      
+
       subroutine sfc_diag_finalize
       end subroutine sfc_diag_finalize
-      
+
 !> \brief Brief description of the subroutine
 !!
 !! \section arg_table_sfc_diag_run Arguments
@@ -37,10 +37,10 @@
 !! | q2m            | specific_humidity_at_2m                                                      | specific humidity at 2 m                                    | kg kg-1       |    1 | real      | kind_phys | out    | F        |
 !! | prslki         | ratio_of_exner_function_between_midlayer_and_interface_at_lowest_model_layer | Exner function ratio bt midlayer and interface at 1st layer | ratio         |    1 | real      | kind_phys | in     | F        |
 !! | evap           | kinematic_surface_upward_latent_heat_flux                                    | surface upward evaporation flux                             | kg kg-1 m s-1 |    1 | real      | kind_phys | in     | F        |
-!! | fm             | Monin-Obukhov_similarity_function_for_momentum                               | Monin-Obukhov similarity parameter for momentum             | none          |    1 | real      | kind_phys | in     | F        |
-!! | fh             | Monin-Obukhov_similarity_function_for_heat                                   | Monin-Obukhov similarity parameter for heat                 | none          |    1 | real      | kind_phys | in     | F        |
-!! | fm10           | Monin-Obukhov_similarity_function_for_momentum_at_10m                        | Monin-Obukhov similarity parameter for momentum             | none          |    1 | real      | kind_phys | in     | F        |
-!! | fh2            | Monin-Obukhov_similarity_function_for_heat_at_2m                             | Monin-Obukhov similarity parameter for heat                 | none          |    1 | real      | kind_phys | in     | F        |
+!! | fm             | monin_obukhov_similarity_function_for_momentum                               | Monin-Obukhov similarity parameter for momentum             | none          |    1 | real      | kind_phys | in     | F        |
+!! | fh             | monin_obukhov_similarity_function_for_heat                                   | Monin-Obukhov similarity parameter for heat                 | none          |    1 | real      | kind_phys | in     | F        |
+!! | fm10           | monin_obukhov_similarity_function_for_momentum_at_10m                        | Monin-Obukhov similarity parameter for momentum             | none          |    1 | real      | kind_phys | in     | F        |
+!! | fh2            | monin_obukhov_similarity_function_for_heat_at_2m                             | Monin-Obukhov similarity parameter for heat                 | none          |    1 | real      | kind_phys | in     | F        |
 !! | errmsg         | ccpp_error_message                                                           | error message for error handling in CCPP                    | none          |    0 | character | len=*     | out    | F        |
 !! | errflg         | ccpp_error_flag                                                              | error flag for error handling in CCPP                       | flag          |    0 | integer   |           | out    | F        |
 !!

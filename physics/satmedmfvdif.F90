@@ -29,7 +29,7 @@
       end subroutine satmedmfvdif_finalize
 
 !> \defgroup SATMEDMF FV3GFS satmedmfvdif_run Main
-!! \brief This subroutine contains all of the logic for the 
+!! \brief This subroutine contains all of the logic for the
 !! scale-aware TKE-based moist eddy-diffusion mass-flux (EDMF) scheme.
 !!
 !> \section arg_table_satmedmfvdif_run Argument Table
@@ -40,14 +40,14 @@
 !! | km             | vertical_dimension                                                          | vertical layer dimension                              | count         |    0 | integer   |           | in     | F        |
 !! | ntrac          | number_of_vertical_diffusion_tracers                                        | number of tracers to diffuse vertically               | count         |    0 | integer   |           | in     | F        |
 !! | ntcw           | index_for_liquid_cloud_condensate                                           | tracer index for cloud condensate (or liquid water)   | index         |    0 | integer   |           | in     | F        |
-!! | ntiw           | index_for_ice_cloud_condensate                                              | tracer index for ice water                            | index         |    0 | integer   |           | in     | F        | 
+!! | ntiw           | index_for_ice_cloud_condensate                                              | tracer index for ice water                            | index         |    0 | integer   |           | in     | F        |
 !! | nthm           | number_of_tracers_for_cloud_condensate                                      | number of tracers for cloud condensate                | count         |    0 | integer   |           | in     | F        |
 !! | ntke           | index_for_turbulent_kinetic_energy_vertical_diffusion_tracer | index for turbulent kinetic energy in the vertically diffused tracer array | index   |    0 | integer   |           | in     | F        |
 !! | grav           | gravitational_acceleration                                                  | gravitational acceleration                            | m s-2         |    0 | real      | kind_phys | in     | F        |
 !! | rd             | gas_constant_dry_air                                                        | ideal gas constant for dry air                        | J kg-1 K-1    |    0 | real      | kind_phys | in     | F        |
 !! | cp             | specific_heat_of_dry_air_at_constant_pressure                               | specific heat of dry air at constant pressure         | J kg-1 K-1    |    0 | real      | kind_phys | in     | F        |
 !! | rv             | gas_constant_water_vapor                                                    | ideal gas constant for water vapor                    | J kg-1 K-1    |    0 | real      | kind_phys | in     | F        |
-!! | hvap           | latent_heat_of_vaporization_of_water_at_0C                                  | latent heat of evaporation/sublimation                | J kg-1        |    0 | real      | kind_phys | in     | F        |
+!! | hvap           | latent_heat_of_vaporization_of_water_at_0c                                  | latent heat of evaporation/sublimation                | J kg-1        |    0 | real      | kind_phys | in     | F        |
 !! | fv             | ratio_of_vapor_to_dry_air_gas_constants_minus_one                           | (rv/rd) - 1 (rv = ideal gas constant for water vapor) | none          |    0 | real      | kind_phys | in     | F        |
 !! | eps            | ratio_of_dry_air_to_water_vapor_gas_constants                               | rd/rv                                                 | none          |    0 | real      | kind_phys | in     | F        |
 !! | epsm1          | ratio_of_dry_air_to_water_vapor_gas_constants_minus_one                     | (rd/rv) - 1                                           | none          |    0 | real      | kind_phys | in     | F        |
@@ -68,8 +68,8 @@
 !! | zorl           | surface_roughness_length                                                    | surface roughness length in cm                        | cm            |    1 | real      | kind_phys | in     | F        |
 !! | u10m           | x_wind_at_10m                                                               | x component of wind at 10 m                           | m s-1         |    1 | real      | kind_phys | in     | F        |
 !! | v10m           | y_wind_at_10m                                                               | y component of wind at 10 m                           | m s-1         |    1 | real      | kind_phys | in     | F        |
-!! | fm             | Monin-Obukhov_similarity_function_for_momentum                              | Monin-Obukhov similarity function for momentum        | none          |    1 | real      | kind_phys | in     | F        |
-!! | fh             | Monin-Obukhov_similarity_function_for_heat                                  | Monin-Obukhov similarity function for heat            | none          |    1 | real      | kind_phys | in     | F        |
+!! | fm             | monin_obukhov_similarity_function_for_momentum                              | Monin-Obukhov similarity function for momentum        | none          |    1 | real      | kind_phys | in     | F        |
+!! | fh             | monin_obukhov_similarity_function_for_heat                                  | Monin-Obukhov similarity function for heat            | none          |    1 | real      | kind_phys | in     | F        |
 !! | tsea           | surface_skin_temperature                                                    | surface skin temperature                              | K             |    1 | real      | kind_phys | in     | F        |
 !! | heat           | kinematic_surface_upward_sensible_heat_flux                                 | kinematic surface upward sensible heat flux           | K m s-1       |    1 | real      | kind_phys | in     | F        |
 !! | evap           | kinematic_surface_upward_latent_heat_flux                                   | kinematic surface upward latent heat flux             | kg kg-1 m s-1 |    1 | real      | kind_phys | in     | F        |
@@ -83,7 +83,7 @@
 !! | phii           | geopotential_at_interface                                                   | geopotential at model layer interfaces                | m2 s-2        |    2 | real      | kind_phys | in     | F        |
 !! | phil           | geopotential                                                                | geopotential at model layer centers                   | m2 s-2        |    2 | real      | kind_phys | in     | F        |
 !! | delt           | time_step_for_physics                                                       | time step for physics                                 | s             |    0 | real      | kind_phys | in     | F        |
-!! | dspheat        | flag_TKE_dissipation_heating                                                | flag for using TKE dissipation heating                | flag          |    0 | logical   |           | in     | F        |
+!! | dspheat        | flag_tke_dissipation_heating                                                | flag for using TKE dissipation heating                | flag          |    0 | logical   |           | in     | F        |
 !! | dusfc          | instantaneous_surface_x_momentum_flux                                       | x momentum flux                                       | Pa            |    1 | real      | kind_phys | out    | F        |
 !! | dvsfc          | instantaneous_surface_y_momentum_flux                                       | y momentum flux                                       | Pa            |    1 | real      | kind_phys | out    | F        |
 !! | dtsfc          | instantaneous_surface_upward_sensible_heat_flux                             | surface upward sensible heat flux                     | W m-2         |    1 | real      | kind_phys | out    | F        |
@@ -136,7 +136,7 @@
       real(kind=kind_phys), intent(out) ::                              &
      &                     dusfc(im),     dvsfc(im),                    &
      &                     dtsfc(im),     dqsfc(im),                    &
-     &                     hpbl(im) 
+     &                     hpbl(im)
 !
       logical, intent(out)  :: dspheat
       character(len=*), intent(out) :: errmsg
@@ -241,7 +241,7 @@
 !
       real(kind=kind_phys) qlcr, zstblmax
 !
-      real(kind=kind_phys) h1 
+      real(kind=kind_phys) h1
 !!
       parameter(wfac=7.0,cfac=4.0)
       parameter(gamcrt=3.,gamcrq=0.,sfcfrac=0.1)
@@ -435,7 +435,7 @@
         enddo
       enddo
 !
-! The background vertical diffusivities in the inversion layers are limited 
+! The background vertical diffusivities in the inversion layers are limited
 !    to be less than or equal to xkzminv
 !
       do k = 1,km1
@@ -448,7 +448,7 @@
         enddo
       enddo
 !
-! compute an empirical cloud fraction based on 
+! compute an empirical cloud fraction based on
 !    Xu & Randall's (1996,JAS) study
 !
       do k = 1, km
@@ -517,7 +517,7 @@
          if(.not.sfcflg(i) .or. sflux(i) <= 0.) pblflg(i)=.false.
       enddo
 !
-!  compute critical bulk richardson number 
+!  compute critical bulk richardson number
 !
       do i = 1,im
         if(pblflg(i)) then
@@ -679,7 +679,7 @@
              rbint = (crb(i)-rbdn(i))/(rbup(i)-rbdn(i))
            endif
            hpbl(i) = zl(i,k-1) + rbint*(zl(i,k)-zl(i,k-1))
-           if(hpbl(i) < zi(i,kpbl(i))) then 
+           if(hpbl(i) < zi(i,kpbl(i))) then
              kpbl(i) = kpbl(i) - 1
            endif
            if(kpbl(i) <= 1) then
@@ -815,7 +815,7 @@
                   tem2 = min(ptem, -zfmin)
                 endif
                 ptem1 = (bsum - tke(i,k)) / tem2
-                zlup = zlup - ptem1 * dz 
+                zlup = zlup - ptem1 * dz
                 zlup = max(zlup, 0.)
                 mlenflg = .false.
               endif
@@ -845,7 +845,7 @@
                   tem2 = min(ptem, -zfmin)
                 endif
                 ptem1 = (bsum - tke(i,k)) / tem2
-                zldn = zldn - ptem1 * dz 
+                zldn = zldn - ptem1 * dz
                 zldn = max(zldn, 0.)
                 mlenflg = .false.
               endif
@@ -880,7 +880,7 @@
           else
             ptem = 1. + 2.7 * zol(i)
             zk = tem / ptem
-          endif 
+          endif
           elm(i,k) = zk*rlam(i,k)/(rlam(i,k)+zk)
 !
           dz = zi(i,k+1) - zi(i,k)
@@ -958,7 +958,7 @@
       enddo
 !
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!  compute buoyancy and shear productions of tke 
+!  compute buoyancy and shear productions of tke
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !
       do k = 1, km1
@@ -1082,7 +1082,7 @@
       enddo
 !
 !----------------------------------------------------------------------
-!     first predict tke due to tke production & dissipation(diss) 
+!     first predict tke due to tke production & dissipation(diss)
 !
       do k = 1,km1
         do i=1,im

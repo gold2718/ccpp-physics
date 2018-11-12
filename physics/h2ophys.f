@@ -35,7 +35,7 @@
 !! | prsl           | air_pressure                                      | mid-layer pressure                                | Pa      |    2 | real      | kind_phys | in     | F        |
 !! | h2opltc        | h2o_forcing                                       | water forcing data                                | various |    3 | real      | kind_phys | in     | F        |
 !! | h2o_coeff      | number_of_coefficients_in_h2o_forcing_data        | number of coefficients in h2o forcing data        | index   |    0 | integer   |           | in     | F        |
-!! | ldiag3d        | flag_diagnostics_3D                               | flag for calculating 3-D diagnostic fields        | flag    |    0 | logical   |           | in     | F        |
+!! | ldiag3d        | flag_diagnostics_3d                               | flag for calculating 3-D diagnostic fields        | flag    |    0 | logical   |           | in     | F        |
 !! | me             | mpi_rank                                          | rank of the current MPI task                      | index   |    0 | integer   |           | in     | F        |
 !! | errmsg         | ccpp_error_message                                | error message for error handling in CCPP          | none    |    0 | character | len=*     | out    | F        |
 !! | errflg         | ccpp_error_flag                                   | error flag for error handling in CCPP             | flag    |    0 | integer   |           | out    | F        |
@@ -69,7 +69,7 @@
       integer k,kmax,kmin,l,i,j
       logical              flg(im)
       real(kind=kind_phys) pmax, pmin, tem, temp
-      real(kind=kind_phys) wk1(im), wk2(im), wk3(im), pltc(im,h2o_coeff)
+      real(kind=kind_phys) wk1(im), wk2(im), wk3(im), pltc(im,h2o_coeff)&
      &,                    h2oib(im)
       real, parameter :: prsmax=10000.0, pmaxl=log(prsmax)
 !
@@ -109,7 +109,7 @@
             do j=1,h2o_coeff
               do i=1,im
                 if (flg(i)) then
-                  pltc(i,j)  = wk2(i) * h2opltc(i,k,j)
+                  pltc(i,j)  = wk2(i) * h2opltc(i,k,j)                  &
      &                       + wk3(i) * h2opltc(i,k+1,j)
                 endif
               enddo
@@ -131,7 +131,7 @@
           if (prsl(i,l) < prsmax) then
             h2oib(i)  = h2o(i,l)            ! no filling
             tem       = 1.0 / pltc(i,2)     ! 1/teff
-            h2o(i,l)  = (h2oib(i) + (pltc(i,1)+pltc(i,3)*tem)*dt)
+            h2o(i,l)  = (h2oib(i) + (pltc(i,1)+pltc(i,3)*tem)*dt)       &
      &                 / (1.0 + tem*dt)
           endif
 

@@ -37,7 +37,7 @@ module lsm_ruc
 
       ! Initialize CCPP error handling variables
       errmsg = ''
-      errflg = 0 
+      errflg = 0
 
       !--- initialize soil vegetation
       call set_soilveg_ruc(me, isot, ivegsrc, nlunit)
@@ -65,7 +65,7 @@ module lsm_ruc
 
 ! ===================================================================== !
 !  lsm_ruc_run:                                                         !
-!  RUC Surface Model - WRF4.0 version                                   ! 
+!  RUC Surface Model - WRF4.0 version                                   !
 !  program history log:                                                 !
 !    may  2018  -- tanya smirnova                                       !
 !                                                                       !
@@ -156,7 +156,7 @@ module lsm_ruc
 !! | con_pi          | pi                                                                           | ratio of a circle's circumference to its diameter               | radians       |    0 | real      | kind_phys | in     | F        |
 !! | con_rd          | gas_constant_dry_air                                                         | ideal gas constant for dry air                                  | J kg-1 K-1    |    0 | real      | kind_phys | in     | F        |
 !! | con_rv          | gas_constant_water_vapor                                                     | ideal gas constant for water vapor                              | J kg-1 K-1    |    0 | real      | kind_phys | in     | F        |
-!! | con_hvap        | latent_heat_of_vaporization_of_water_at_0C                                   | latent heat of vaporization/sublimation (hvap)                  | J kg-1        |    0 | real      | kind_phys | in     | F        |
+!! | con_hvap        | latent_heat_of_vaporization_of_water_at_0c                                   | latent heat of vaporization/sublimation (hvap)                  | J kg-1        |    0 | real      | kind_phys | in     | F        |
 !! | con_fvirt       | ratio_of_vapor_to_dry_air_gas_constants_minus_one                            | rv/rd - 1 (rv = ideal gas constant for water vapor)             | none          |    0 | real      | kind_phys | in     | F        |
 !! | tprcp           | nonnegative_lwe_thickness_of_precipitation_amount_on_dynamics_timestep       | total precipitation amount in each time step                    | m             |    1 | real      | kind_phys | in     | F        |
 !! | rain            | lwe_thickness_of_precipitation_amount_on_dynamics_timestep                   | total rain at this time step                                    | m             |    1 | real      | kind_phys | in     | F        |
@@ -279,7 +279,7 @@ module lsm_ruc
       real (kind=kind_phys), dimension(im), intent(in) :: u1, v1,&
      &       t1, sigmaf, sfcemis, dlwflx, dswsfc, snet, tg3, cm,        &
      &       ch, prsl1, ddvel, shdmin, shdmax,                          &
-     &       snoalb, alvwf, alnwf, zf, qc, q1 
+     &       snoalb, alvwf, alnwf, zf, qc, q1
 
       integer, dimension(im), intent(in) :: islmsk
       real (kind=kind_phys),  intent(in) :: delt
@@ -326,7 +326,7 @@ module lsm_ruc
      &       tslb_old, sh2o_old, keepfr_old, smfrkeep_old
 
       real (kind=kind_phys),dimension (im,1,1)      ::                  &
-     &     conflx2, sfcprs, sfctmp, q2, qcatm, rho2 
+     &     conflx2, sfcprs, sfctmp, q2, qcatm, rho2
       real (kind=kind_phys),dimension (im,1)        ::                  &
      &     albbck, alb, chs, flhc, flqc, wet, smmax, cmc,               &
      &     dew, drip,  ec, edir, ett, lh, esnow, etp, qfx,              &
@@ -395,7 +395,7 @@ module lsm_ruc
         print *,'vegtype=',ipr,vegtype(ipr)
         print *,'kdt, iter =',kdt,iter
       endif
- 
+
 ! RUC initialization
       if( kdt == 1 .and. iter ==1 ) then
         !print *,'RUC LSM initialization, kdt=', kdt
@@ -431,17 +431,17 @@ module lsm_ruc
       kts = 1
       kme = 1
       kte = 1
- 
+
       ! mosaic_lu=mosaic_soil=0, set in set_soilveg_ruc.F90
-      ! set mosaic_lu=mosaic_soil=1 when fractional land and soil 
+      ! set mosaic_lu=mosaic_soil=1 when fractional land and soil
       ! categories available
-      ! for now set fractions of differnet landuse and soil types 
+      ! for now set fractions of differnet landuse and soil types
       ! in the grid cell to zero
 
       landusef (:,:,:) = 0.0
       soilctop (:,:,:) = 0.0
 
-      !> -- number of soil categories          
+      !> -- number of soil categories
       !if(isot == 1) then
       !nscat = 19 ! stasgo
       !else
@@ -544,14 +544,14 @@ module lsm_ruc
         endif
       enddo ! i
 
-!> - Prepare variables to run RUC LSM: 
+!> - Prepare variables to run RUC LSM:
 !!  -   1. configuration information (c):
 !!\n  ----------------------------------------
 !!\n  \a ffrozp  - fraction of frozen precipitation
 !!\n  \a frpcpn  - .true. if mixed phase precipitation available
 !!\n  \a 1:im - horizontal_loop_extent
 !!\n  \a fice    - fraction of sea-ice in the grid cell
-!!\n  \a delt    - timestep (sec) (dt should not exceed 3600 secs) 
+!!\n  \a delt    - timestep (sec) (dt should not exceed 3600 secs)
 !!\n  \a conflx2 - height (\f$m\f$) above ground of atmospheric forcing variables
 !!\n  \a lsoil_ruc - number of soil layers (= 6 or 9)
 !!\n  \a zs      - the depth of each soil level (\f$m\f$)
@@ -614,7 +614,7 @@ module lsm_ruc
 
           prcp(i,j)       = rhoh2o * tprcp(i) ! tprcp in [m]
           raincv(i,j)     = rhoh2o * rainc(i)
-          rainncv(i,j)    = rhoh2o * rain(i) 
+          rainncv(i,j)    = rhoh2o * rain(i)
           graupelncv(i,j) = rhoh2o * graupel(i)
           snowncv(i,j)    = rhoh2o * snow(i)
           precipfr(i,j)   = rainncv(i,j) * ffrozp(i,j)
@@ -622,7 +622,7 @@ module lsm_ruc
           qvg(i,j)    = sfcqv(i)
           qsfc(i,j)   = sfcqv(i)/(1.+sfcqv(i))
           qsg(i,j)    = rslf(prsl1(i),tsurf(i))
-          qcg(i,j)    = sfcqc(i) 
+          qcg(i,j)    = sfcqc(i)
 
 !>  -   3. canopy/soil characteristics (s):
 !!\n      ------------------------------------
@@ -672,7 +672,7 @@ module lsm_ruc
           sfcems(i,j) = sfcemis(i)
 
           snoalb1d(i,j) = snoalb(i)
-          albbck(i,j)   = max(0.01, 0.5 * (alvwf(i) + alnwf(i))) 
+          albbck(i,j)   = max(0.01, 0.5 * (alvwf(i) + alnwf(i)))
           alb(i,j)      = sfalb(i)
 
           tbot(i,j) = tg3(i)
@@ -694,7 +694,7 @@ module lsm_ruc
 !!\n \a ch         - surface exchange coefficient for heat (\f$m s^{-1}\f$)      -> chs
 !!\n \a z0         - surface roughness (\f$m\f$)     -> zorl(\f$cm\f$)
 
-          cmc(i,j) = canopy(i)            !  [mm] 
+          cmc(i,j) = canopy(i)            !  [mm]
           soilt(i,j) = tsurf(i)            ! clu_q2m_iter
         ! sanity check for snow temperature tsnow
         if (tsnow(i) > 0. .and. tsnow(i) < 273.15) then
@@ -733,11 +733,11 @@ module lsm_ruc
 
         !> -- sanity checks on sneqv and snowh
         if (sneqv(i,j) /= 0.0 .and. snowh(i,j) == 0.0) then
-          snowh(i,j) = 0.003 * sneqv(i,j) ! snow density ~300 kg m-3 
+          snowh(i,j) = 0.003 * sneqv(i,j) ! snow density ~300 kg m-3
         endif
 
         if (snowh(i,j) /= 0.0 .and. sneqv(i,j) == 0.0) then
-          sneqv(i,j) = 300. * snowh(i,j) ! snow density ~300 kg m-3 
+          sneqv(i,j) = 300. * snowh(i,j) ! snow density ~300 kg m-3
         endif
 
         if (sneqv(i,j) > 0. .and. snowh(i,j) > 0.) then
@@ -749,7 +749,7 @@ module lsm_ruc
           !sncovr(i,j) = snowc(i)
           sncovr(i,j) = sncovr1(i)
 
-          chs(i,j)    = ch(i) * wind(i) ! compute conductance 
+          chs(i,j)    = ch(i) * wind(i) ! compute conductance
           flhc(i,j)   = chs(i,j) * rho(i) * con_cp * (1. + 0.84*q2(i,1,j))
           flqc(i,j)   = chs(i,j) * rho(i) * wet(i,j)
           ! for output
@@ -859,7 +859,7 @@ module lsm_ruc
      print *,'rdlai2d =',rdlai2d
     endif
 
-!> - Call RUC LSM lsmruc(). 
+!> - Call RUC LSM lsmruc().
       call lsmruc( delt, kdt, iter, nsoil,                                   &
      &          graupelncv(i,j), snowncv(i,j), rainncv(i,j), raincv(i,j),    &
      &          zs, prcp(i,j), sneqv(i,j), snowh(i,j), sncovr(i,j),          &
@@ -969,7 +969,7 @@ module lsm_ruc
           stm(i)    = soilm(i,j)
           tsurf(i)  = soilt(i,j)
           tice(i)   = tsurf(i)
-          !  --- ...  units [m/s] = [g m-2 s-1] 
+          !  --- ...  units [m/s] = [g m-2 s-1]
           runof (i)  = runoff1(i,j)
           drain (i)  = runoff2(i,j)
 
@@ -991,7 +991,7 @@ module lsm_ruc
           canopy(i)  = cmc(i,j)   ! mm
           weasd(i)   = sneqv(i,j) ! mm
           sncovr1(i) = sncovr(i,j)
-          !  ---- ... outside RUC LSM, roughness uses cm as unit 
+          !  ---- ... outside RUC LSM, roughness uses cm as unit
           !  (update after snow's effect)
           zorl(i) = znt(i,j)*100.
           sfalb(i)= alb(i,j)
@@ -1083,8 +1083,8 @@ module lsm_ruc
       integer,                                 intent(in   ) :: lsm
       integer,                                 intent(in   ) :: lsm_ruc
       integer,                                 intent(in   ) :: isot
-      integer,                                 intent(in   ) :: im, nlev   
-      integer,                                 intent(in   ) :: lsoil_ruc   
+      integer,                                 intent(in   ) :: im, nlev
+      integer,                                 intent(in   ) :: lsoil_ruc
       integer,                                 intent(in   ) :: lsoil
       integer,               dimension(im),    intent(in   ) :: islmsk
       real (kind=kind_phys), dimension(im),    intent(in   ) :: tsurf
@@ -1124,22 +1124,22 @@ module lsm_ruc
       real (kind=kind_phys),    dimension( 1:im , 1:1 )       :: tbot
       real (kind=kind_phys),    dimension( 1:im , 1:1 )       :: smtotn
       real (kind=kind_phys),    dimension( 1:im , 1:1 )       :: smtotr
-      real (kind=kind_phys),    dimension( 1:im , 1:lsoil_ruc, 1:1 ) :: dumsm 
+      real (kind=kind_phys),    dimension( 1:im , 1:lsoil_ruc, 1:1 ) :: dumsm
       real (kind=kind_phys),    dimension( 1:im , 1:lsoil_ruc, 1:1 ) :: dumt
       real (kind=kind_phys),    dimension( 1:im , 1:lsoil_ruc, 1:1 ) :: smfr
       real (kind=kind_phys),    dimension( 1:im , 1:lsoil_ruc, 1:1 ) :: soilm
       real (kind=kind_phys),    dimension( 1:im , 1:lsoil_ruc, 1:1 ) :: soiltemp
       real (kind=kind_phys),    dimension( 1:im , 1:lsoil_ruc, 1:1 ) :: soilh2o
 
-      real (kind=kind_phys) :: st_input(1:im,1:lsoil_ruc*3,1:1)        
-      real (kind=kind_phys) :: sm_input(1:im,1:lsoil_ruc*3,1:1)       
+      real (kind=kind_phys) :: st_input(1:im,1:lsoil_ruc*3,1:1)
+      real (kind=kind_phys) :: sm_input(1:im,1:lsoil_ruc*3,1:1)
 
       integer               :: ids,ide, jds,jde, kds,kde, &
                                ims,ime, jms,jme, kms,kme, &
                                its,ite, jts,jte, kts,kte, &
                                i, j, k, l, num_soil_layers, ipr
 
-      real(kind=kind_phys), dimension(1:lsoil_ruc) :: zs2, dzs 
+      real(kind=kind_phys), dimension(1:lsoil_ruc) :: zs2, dzs
       integer,              dimension(1:lsoil)  :: st_levels_input ! 4 - for Noah lsm
       integer,              dimension(1:lsoil)  :: sm_levels_input ! 4 - for Noah lsm
 
@@ -1182,7 +1182,7 @@ module lsm_ruc
          jds = 1
          jms = 1
          jts = 1
-         jde = 1 
+         jde = 1
          jme = 1
          jte = 1
          kds = 1
@@ -1200,7 +1200,7 @@ module lsm_ruc
          flag_soil_levels = 0  ! =1 for input from RUC LSM
          flag_sst = 0
 
-       do j=jts,jte ! 
+       do j=jts,jte !
        do i=its,ite ! i = horizontal loop
           ! check if input is from RUC LSM
           if(islmsk(i) == 1 .and. smois(i,j) > 0.) then ! land point with valid soil moisture
@@ -1218,10 +1218,10 @@ module lsm_ruc
         print *,'Noah stc(ipr,:) ==', ipr, stc(ipr,:)
         print *,'Noah vegtype(ipr) ==', ipr, vegtype(ipr)
         print *,'Noah soiltyp(ipr) ==', ipr, soiltyp(ipr)
-        print *,'its,ite,jts,jte ',its,ite,jts,jte 
+        print *,'its,ite,jts,jte ',its,ite,jts,jte
      endif
 
-       do j=jts,jte ! 
+       do j=jts,jte !
        do i=its,ite ! i = horizontal loop
             tsk(i,j) = tsurf(i)
             tbot(i,j)=tg3(i)
@@ -1238,7 +1238,7 @@ module lsm_ruc
            xice(i,j)=0.
        elseif(islmsk(i) == 2) then  ! ice
            ivgtyp(i,j)=15 ! MODIS
-          !> -- number of soil categories          
+          !> -- number of soil categories
           if(isot == 1) then
             isltyp(i,j) = 16 ! STATSGO
           else
@@ -1341,7 +1341,7 @@ module lsm_ruc
         do k=1,lsoil_ruc -1
           smtotr(i,j)=smtotr(i,j) + soilm(i,k,j) *dzs(k)
         enddo
-       ! Noah soil moisture bucket 
+       ! Noah soil moisture bucket
           smtotn(i,j)=sm_input(i,2,j)*0.1 + sm_input(i,3,j)*0.2  &
                 + sm_input(i,4,j)*0.7 + sm_input(i,5,j)*1.
 

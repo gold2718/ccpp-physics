@@ -68,8 +68,8 @@
 !! | zm             | ocean_mixed_layer_thickness                                                  | mixed layer thickness                                       | m             |    1 | real      | kind_phys | inout  | F        |
 !! | xtts           | sensitivity_of_dtl_heat_content_to_surface_temperature                       | d(xt)/d(ts)                                                 | m             |    1 | real      | kind_phys | inout  | F        |
 !! | xzts           | sensitivity_of_dtl_thickness_to_surface_temperature                          | d(xz)/d(ts)                                                 | m K-1         |    1 | real      | kind_phys | inout  | F        |
-!! | dt_cool        | sub-layer_cooling_amount                                                     | sub-layer cooling amount                                    | K             |    1 | real      | kind_phys | inout  | F        |
-!! | z_c            | sub-layer_cooling_thickness                                                  | sub-layer cooling thickness                                 | m             |    1 | real      | kind_phys | inout  | F        |
+!! | dt_cool        | sub_layer_cooling_amount                                                     | sub-layer cooling amount                                    | K             |    1 | real      | kind_phys | inout  | F        |
+!! | z_c            | sub_layer_cooling_thickness                                                  | sub-layer cooling thickness                                 | m             |    1 | real      | kind_phys | inout  | F        |
 !! | c_0            | coefficient_c_0                                                              | coefficient1 to calculate d(tz)/d(ts)                       | none          |    1 | real      | kind_phys | inout  | F        |
 !! | c_d            | coefficient_c_d                                                              | coefficient2 to calculate d(tz)/d(ts)                       | none          |    1 | real      | kind_phys | inout  | F        |
 !! | w_0            | coefficient_w_0                                                              | coefficient3 to calculate d(tz)/d(ts)                       | none          |    1 | real      | kind_phys | inout  | F        |
@@ -436,7 +436,7 @@ cc
           rf_ts  = (1000.*rain(i)/rho_w)*alfac*cp_w*(1.0+rch(i)*hl_ts)
           q_ts   = rnl_ts + hs_ts + hl_ts + omg_sh*rf_ts
 !
-!> - Call cool_skin(), which is the sub-layer cooling parameterization 
+!> - Call cool_skin(), which is the sub-layer cooling parameterization
 !! (Fairfall et al. (1996) \cite fairall_et_al_1996).
 ! & calculate c_0, c_d
 !
@@ -814,8 +814,8 @@ cc
 !! | nstf_name5     | vertical_temperature_average_range_upper_bound         | zsea2                                          | mm      |    0 | integer   |           | in     | F        |
 !! | xt             | diurnal_thermocline_layer_heat_content                 | heat content in diurnal thermocline layer      | K m     |    1 | real      | kind_phys | in     | F        |
 !! | xz             | diurnal_thermocline_layer_thickness                    | diurnal thermocline layer thickness            | m       |    1 | real      | kind_phys | in     | F        |
-!! | dt_cool        | sub-layer_cooling_amount                               | sub-layer cooling amount                       | K       |    1 | real      | kind_phys | in     | F        |
-!! | z_c            | sub-layer_cooling_thickness                            | sub-layer cooling thickness                    | m       |    1 | real      | kind_phys | in     | F        |
+!! | dt_cool        | sub_layer_cooling_amount                               | sub-layer cooling amount                       | K       |    1 | real      | kind_phys | in     | F        |
+!! | z_c            | sub_layer_cooling_thickness                            | sub-layer cooling thickness                    | m       |    1 | real      | kind_phys | in     | F        |
 !! | rslimsk        | sea_land_ice_mask_real                                 | landmask: sea/land/ice=0/1/2                   | flag    |    1 | real      | kind_phys | in     | F        |
 !! | tref           | sea_surface_reference_temperature                      | reference/foundation temperature               | K       |    1 | real      | kind_phys | in     | F        |
 !! | xlon           | longitude                                              | longitude                                      | radians |    1 | real      | kind_phys | in     | F        |

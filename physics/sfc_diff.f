@@ -1,7 +1,7 @@
 !>  \file sfc_diff.f
-!! This file contains the surface roughness length formulation based on 
-!! the surface sublayer scheme in 
-!! Zeng and Dickinson (1998) \cite zeng_and_dickinson_1998. 
+!! This file contains the surface roughness length formulation based on
+!! the surface sublayer scheme in
+!! Zeng and Dickinson (1998) \cite zeng_and_dickinson_1998.
 
 !> This module contains the CCPP-compliant GFS surface layer scheme.
       module sfc_ex_coef
@@ -18,7 +18,7 @@
 !> \brief This subroutine calculates surface roughness length.
 !!
 !! This subroutine includes the surface roughness length formulation
-!! based on the surface sublayer scheme in 
+!! based on the surface sublayer scheme in
 !! Zeng and Dickinson (1998) \cite zeng_and_dickinson_1998.
 !> \section arg_table_sfc_ex_coef_run Argument Table
 !! | local_name     | standard_name                                                                | long_name                                                        | units      | rank | type      |    kind   | intent | optional |
@@ -40,13 +40,13 @@
 !! | prslki         | ratio_of_exner_function_between_midlayer_and_interface_at_lowest_model_layer | Exner function ratio bt midlayer and interface at 1st layer      | ratio      |    1 | real      | kind_phys | in     | F        |
 !! | islimsk        | sea_land_ice_mask                                                            | landmask: sea/land/ice=0/1/2                                     | flag       |    1 | integer   |           | in     | F        |
 !! | stress         | surface_wind_stress                                                          | surface wind stress                                              | m2 s-2     |    1 | real      | kind_phys | inout  | F        |
-!! | fm             | Monin-Obukhov_similarity_function_for_momentum                               | Monin-Obukhov similarity parameter for momentum                  | none       |    1 | real      | kind_phys | inout  | F        |
-!! | fh             | Monin-Obukhov_similarity_function_for_heat                                   | Monin-Obukhov similarity parameter for heat                      | none       |    1 | real      | kind_phys | inout  | F        |
+!! | fm             | monin_obukhov_similarity_function_for_momentum                               | Monin-Obukhov similarity parameter for momentum                  | none       |    1 | real      | kind_phys | inout  | F        |
+!! | fh             | monin_obukhov_similarity_function_for_heat                                   | Monin-Obukhov similarity parameter for heat                      | none       |    1 | real      | kind_phys | inout  | F        |
 !! | ustar          | surface_friction_velocity                                                    | surface friction velocity                                        | m s-1      |    1 | real      | kind_phys | inout  | F        |
 !! | wind           | wind_speed_at_lowest_model_layer                                             | wind speed at lowest model level                                 | m s-1      |    1 | real      | kind_phys | inout  | F        |
 !! | ddvel          | surface_wind_enhancement_due_to_convection                                   | surface wind enhancement due to convection                       | m s-1      |    1 | real      | kind_phys | in     | F        |
-!! | fm10           | Monin-Obukhov_similarity_function_for_momentum_at_10m                        | Monin-Obukhov similarity parameter for momentum                  | none       |    1 | real      | kind_phys | inout  | F        |
-!! | fh2            | Monin-Obukhov_similarity_function_for_heat_at_2m                             | Monin-Obukhov similarity parameter for heat                      | none       |    1 | real      | kind_phys | inout  | F        |
+!! | fm10           | monin_obukhov_similarity_function_for_momentum_at_10m                        | Monin-Obukhov similarity parameter for momentum                  | none       |    1 | real      | kind_phys | inout  | F        |
+!! | fh2            | monin_obukhov_similarity_function_for_heat_at_2m                             | Monin-Obukhov similarity parameter for heat                      | none       |    1 | real      | kind_phys | inout  | F        |
 !! | sigmaf         | bounded_vegetation_area_fraction                                             | areal fractional cover of green vegetation bounded on the bottom | frac       |    1 | real      | kind_phys | in     | F        |
 !! | vegtype        | vegetation_type_classification                                               | vegetation type at each grid cell                                | index      |    1 | integer   |           | in     | F        |
 !! | shdmax         | maximum_vegetation_area_fraction                                             | max fractnl cover of green veg                                   | frac       |    1 | real      | kind_phys | in     | F        |
@@ -62,7 +62,7 @@
 !>  \section general_diff GFS Surface Layer Scheme General Algorithm
 !! @{
 !! - Calculate the thermal roughness length formulation over the ocean (see eq. (25) and (26)
-!!  in Zeng et al. (1998) \cite zeng_et_al_1998). 
+!!  in Zeng et al. (1998) \cite zeng_et_al_1998).
 !! - Calculate Zeng's momentum roughness length formulation over land and sea ice.
 !! - Calculate the new vegetation-dependent formulation of thermal roughness length 
 !! (Zheng et al.(2009) \cite zheng_et_al_2009).

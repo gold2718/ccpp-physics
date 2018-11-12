@@ -10,7 +10,7 @@
 
       contains
 
-!>\defgroup GFS_rad_time_vary GFS RRTMG Update 
+!>\defgroup GFS_rad_time_vary GFS RRTMG Update
 !!\ingroup RRTMG
 !! @{
 !! \section arg_table_GFS_rad_time_vary_init Argument Table
@@ -21,9 +21,9 @@
 !> \section arg_table_GFS_rad_time_vary_run Argument Table
 !! | local_name        | standard_name                                          | long_name                                                                     | units    | rank |  type                 |   kind    | intent | optional |
 !! |-------------------|--------------------------------------------------------|-------------------------------------------------------------------------------|----------|------|-----------------------|-----------|--------|----------|
-!! | Model             | FV3-GFS_Control_type                                   | Fortran DDT containing FV3-GFS model control parameters                       | DDT      |    0 | GFS_control_type      |           | inout  | F        |
-!! | Statein           | FV3-GFS_Statein_type                                   | Fortran DDT containing FV3-GFS prognostic state data in from dycore           | DDT      |    0 | GFS_statein_type      |           | in     | F        |
-!! | Tbd               | FV3-GFS_Tbd_type                                       | Fortran DDT containing FV3-GFS data not yet assigned to a defined container   | DDT      |    0 | GFS_tbd_type          |           | inout  | F        |
+!! | Model             | fv3_gfs_control_type                                   | Fortran DDT containing FV3-GFS model control parameters                       | DDT      |    0 | GFS_control_type      |           | inout  | F        |
+!! | Statein           | fv3_gfs_statein_type                                   | Fortran DDT containing FV3-GFS prognostic state data in from dycore           | DDT      |    0 | GFS_statein_type      |           | in     | F        |
+!! | Tbd               | fv3_gfs_tbd_type                                       | Fortran DDT containing FV3-GFS data not yet assigned to a defined container   | DDT      |    0 | GFS_tbd_type          |           | inout  | F        |
 !! | errmsg            | ccpp_error_message                                     | error message for error handling in CCPP                                      | none     |    0 | character             | len=*     | out    | F        |
 !! | errflg            | ccpp_error_flag                                        | error flag for error handling in CCPP                                         | flag     |    0 | integer               |           | out    | F        |
 !!
@@ -64,7 +64,7 @@
           ipseed = mod(nint(con_100*sqrt(Model%sec)), ipsdlim) + 1 + ipsd0
           call random_setseed (ipseed, stat)
           call random_index (ipsdlim, numrdm, stat)
-    
+
           !--- set the random seeds for each column in a reproducible way
           ix = 0
           nb = 1
@@ -101,7 +101,7 @@
       endif
 
   end subroutine GFS_rad_time_vary_run
- 
+
 !> \section arg_table_GFS_rad_time_vary_finalize Argument Table
 !!
   subroutine GFS_rad_time_vary_finalize()

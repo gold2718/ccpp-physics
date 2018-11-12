@@ -1,7 +1,7 @@
 !>  \file samfshalcnv.f
 !!  This file contains the Scale-Aware mass flux Shallow Convection scheme.
 
-!> This module contains the CCPP-compliant scale-aware mass-flux 
+!> This module contains the CCPP-compliant scale-aware mass-flux
 !! shallow convection scheme.
       module samfshalcnv
 
@@ -49,7 +49,7 @@
 !! | epsm1          | ratio_of_dry_air_to_water_vapor_gas_constants_minus_one    | (rd/rv) - 1                                                                                              | none        |    0 | real      | kind_phys | in     | F        |
 !! | fv             | ratio_of_vapor_to_dry_air_gas_constants_minus_one          | (rv/rd) - 1 (rv = ideal gas constant for water vapor)                                                    | none        |    0 | real      | kind_phys | in     | F        |
 !! | grav           | gravitational_acceleration                                 | gravitational acceleration                                                                               | m s-2       |    0 | real      | kind_phys | in     | F        |
-!! | hvap           | latent_heat_of_vaporization_of_water_at_0C                 | latent heat of evaporation/sublimation                                                                   | J kg-1      |    0 | real      | kind_phys | in     | F        |
+!! | hvap           | latent_heat_of_vaporization_of_water_at_0c                 | latent heat of evaporation/sublimation                                                                   | J kg-1      |    0 | real      | kind_phys | in     | F        |
 !! | rd             | gas_constant_dry_air                                       | ideal gas constant for dry air                                                                           | J kg-1 K-1  |    0 | real      | kind_phys | in     | F        |
 !! | rv             | gas_constant_water_vapor                                   | ideal gas constant for water vapor                                                                       | J kg-1 K-1  |    0 | real      | kind_phys | in     | F        |
 !! | t0c            | temperature_at_zero_celsius                                | temperature at 0 degrees Celsius                                                                         | K           |    0 | real      | kind_phys | in     | F        |
@@ -1837,7 +1837,7 @@ c
 !! | shcnvcw        | flag_shallow_convective_cloud                                         | flag for shallow convective cloud                                    |         |    0 | logical          |           | in     | F        |
 !! | frain          | dynamics_to_physics_timestep_ratio                                    | ratio of dynamics timestep to physics timestep                       | none    |    0 | real             | kind_phys | in     | F        |
 !! | rain1          | lwe_thickness_of_shallow_convective_precipitation_amount              | shallow convective rainfall amount on physics timestep               | m       |    1 | real             | kind_phys | in     | F        |
-!! | npdf3d         | number_of_3d_arrays_associated_with_pdf-based_clouds                  | number of 3d arrays associated with pdf based clouds/mp              | count   |    0 | integer          |           | in     | F        |
+!! | npdf3d         | number_of_3d_arrays_associated_with_pdf_based_clouds                  | number of 3d arrays associated with pdf based clouds/mp              | count   |    0 | integer          |           | in     | F        |
 !! | num_p3d        | array_dimension_of_3d_arrays_for_microphysics                         | number of 3D arrays needed for microphysics                          | count   |    0 | integer          |           | in     | F        |
 !! | ncnvcld3d      | number_of_convective_3d_cloud_fields                                  | number of convective 3d clouds fields                                | count   |    0 | integer          |           | in     | F        |
 !! | cnvc           | convective_cloud_cover                                                | convective cloud cover                                               | frac    |    2 | real             | kind_phys | in     | F        |

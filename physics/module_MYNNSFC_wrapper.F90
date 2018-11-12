@@ -1,5 +1,5 @@
 !> \file module_mynnsfc_wrapper.F90
-!!  Contains all of the code related to running the MYNN surface layer scheme 
+!!  Contains all of the code related to running the MYNN surface layer scheme
 
       MODULE mynnsfc_wrapper
 
@@ -50,8 +50,8 @@
 !! | zol                 | surface_stability_parameter                                                 | monin obukhov surface stability parameter             | none          |    1 | real      | kind_phys | inout  | F        |
 !! | mol                 | theta_star                                                                  | temperature flux divided by ustar (temperature scale) | K             |    1 | real      | kind_phys | inout  | F        |
 !! | rmol                | reciprocal_of_obukhov_length                                                | one over obukhov length                               | m-1           |    1 | real      | kind_phys | inout  | F        |
-!! | psim                | Monin-Obukhov_similarity_function_for_momentum                              | Monin-Obukhov similarity function for momentum        | none          |    1 | real      | kind_phys | inout  | F        |
-!! | psih                | Monin-Obukhov_similarity_function_for_heat                                  | Monin-Obukhov similarity function for heat            | none          |    1 | real      | kind_phys | inout  | F        |
+!! | psim                | monin_obukhov_similarity_function_for_momentum                              | Monin-Obukhov similarity function for momentum        | none          |    1 | real      | kind_phys | inout  | F        |
+!! | psih                | monin_obukhov_similarity_function_for_heat                                  | Monin-Obukhov similarity function for heat            | none          |    1 | real      | kind_phys | inout  | F        |
 !! | wspd                | wind_speed_at_lowest_model_layer                                            | wind speed at lowest model level                      | m s-1         |    1 | real      | kind_phys | inout  | F        |
 !! | br                  | bulk_richardson_number_at_lowest_model_level                                | bulk Richardson number at the surface                 | none          |    1 | real      | kind_phys | inout  | F        |
 !! | ch                  | surface_drag_wind_speed_for_momentum_in_air                                 | momentum exchange coefficient                         | m s-1         |    1 | real      | kind_phys | inout  | F        |
@@ -116,11 +116,11 @@ SUBROUTINE mynnsfc_wrapper_run(         &
      &                     EP_1   => con_fvirt,           &
      &                     EP_2   => con_eps
 
-      USE module_sf_mynn, only : SFCLAY_mynn 
+      USE module_sf_mynn, only : SFCLAY_mynn
 
-!------------------------------------------------------------------- 
+!-------------------------------------------------------------------
       implicit none
-!------------------------------------------------------------------- 
+!-------------------------------------------------------------------
 !  ---  constant parameters:
 !      real(kind=kind_phys), parameter :: rvovrd  = r_v/r_d
       real(kind=kind_phys), parameter :: karman  = 0.4
@@ -204,7 +204,7 @@ SUBROUTINE mynnsfc_wrapper_run(         &
      &        dz, rho, th, qv,                              &
      &        pattern_spp_pbl
 
-!MYNN-2D                                                                  
+!MYNN-2D
       real(kind=kind_phys), dimension(im) ::                &
      &        dx, pblh, slmsk, tsk, qsfc, ps,               &
      &        zorl, ust, ustm, hflx, qfx, br, wspd, snowd,  &
@@ -214,7 +214,7 @@ SUBROUTINE mynnsfc_wrapper_run(         &
      !LOCAL
       real, dimension(im) ::                                &
      &        WSTAR, qcg, hfx, znt, ts, snowh,              &
-     &        chs, ck, cd, mavail, regime, xland, GZ1OZ0       
+     &        chs, ck, cd, mavail, regime, xland, GZ1OZ0
 
       ! Initialize CCPP error handling variables
       errmsg = ''
@@ -316,7 +316,7 @@ SUBROUTINE mynnsfc_wrapper_run(         &
      ! POST MYNN SURFACE LAYER (INTERSTITIAL) WORK:
         do i = 1, im
            hflx(i)=hfx(i)/(rho(i,1)*cp)
-           !QFX(i)=evap(i)                                                                                                                                                                                                      
+           !QFX(i)=evap(i)
            zorl(i)=znt(i)*100.             !m -> cm
            stress(i) = ust(i)**2
         enddo
